@@ -132,90 +132,15 @@ Flag_details_Labels=False
 # CSV Header for for the cinvergence 
 CnvgHeader=[]
 
-dataset_List = ["jain.csv","mickey.csv","aggregation.csv","flame.csv",
-                "smiley.csv","diagnosis_II.csv","wdbcNorm.csv",
-                "glass.csv", "iris.csv","iris2D.csv","pathbased.csv",
-                "seeds.csv", "user level.csv","VaryDensity.csv","wine.csv"]
-dataset_List = ["aniso.csv", "blobs.csv", "circles.csv", "moons.csv", "Varied.csv"]
 
-dataset_List = ["appendicitisNorm.csv", "australianNorm.csv", "Blood.csv", 
-                "diabetes.csv", "gaussian.csv","glass.csv","habermanNorm.csv",
-                "heartNorm.csv","ionosphereNorm.csv","LiverNorm.csv","monk-2Norm.csv"]
-
-dataset_List = ["parkinsonsNorm.csv","planningRelaxNorm.csv","saheartNorm.csv",
-                "sonarNorm.csv","spectfNorm.csv","spiral.csv","tic-tac-toeNorm.csv",
-                "tic-tac-toeNorm.csv"]
-
-
-#dataset_List = ["yeast.csv"]
-dataset_List = ["iris.csv"]
-
-
-
-dataset_List = ["iris.csv","wine.csv","breast.csv","glass.csv","balance.csv",
-                "diabetes.csv","blood.csv","seeds.csv","mouse.csv","vary-density.csv",
-                "heart.csv", "ecoli.csv","ionosphere.csv","vertebral2.csv",
-                "vertebral3.csv", "breast-wisconsin.csv","movement_libras.csv"]
-
-dataset_List = ["banknote.csv","segmentation.csv","winequality-red.csv",
-                "winequality-white.csv","page-blocks.csv","pendigits.csv","magic.csv"]
-
-#knn 7
-dataset_List = ["heart.csv", "ecoli.csv","ionosphere.csv","vertebral2.csv",
-                "winequality-white.csv","page-blocks.csv"]
-
-#knn 5
-dataset_List = ["heart.csv", "ecoli.csv","ionosphere.csv","vertebral2.csv",
-                "breast-wisconsin.csv","banknote.csv","winequality-white.csv",
-                "page-blocks.csv"]
-
-#knn 3
-dataset_List = ["ionosphere.csv","vertebral2.csv", "breast-wisconsin.csv",
-                "banknote.csv"]
-
-#knn 1
-dataset_List = ["banknote.csv","segmentation.csv","winequality-red.csv",
-                "winequality-white.csv","page-blocks.csv"]
-
-#knn 1
-dataset_List = ["page-blocks.csv"]
-
-
-dataset_List = ["iris.csv","wine.csv","breast.csv","glass.csv","balance.csv",
-                "blood.csv","seeds.csv","mouse.csv","vary-density.csv",
-                "ecoli.csv","vertebral2.csv"]
-
-#not working
-dataset_List = ["newthyroid.csv", "dermatology.csv"]
-
-
-dataset_List = ["landsat.csv","cmc.csv","jain.csv","flame.csv", "wdbc.csv", 
-                "pathbased.csv","spiral.csv","aggregation.csv"]
-
-dataset_List = ["iris.csv","wine.csv","breast.csv","glass.csv","balance.csv",
-                "blood.csv","seeds.csv","mouse.csv","vary-density.csv",
-                "ecoli.csv","haberman.csv", "heart.csv"]
-
-
-#working
-dataset_List = ["iris.csv","wine.csv","breast.csv","glass.csv","balance.csv",
-                "blood.csv","seeds.csv","mouse.csv","vary-density.csv",
-                "ecoli.csv","haberman.csv", "heart.csv", 
-                "landsat.csv","cmc.csv","jain.csv","flame.csv", "wdbc.csv", 
-                "pathbased.csv","spiral.csv","aggregation.csv"]
-
-dataset_List = ["iris.csv","wine.csv","seeds.csv",
-                "ecoli.csv","landsat.csv"]
-
-dataset_List = ["iris.csv"]
-
-dataset_List = ["diagnosis_II.csv","vary-density.csv","iris.csv","iris2D.csv",
-                "wine.csv","seeds.csv","flame.csv","user-level.csv",
-                "heart.csv","pathbased.csv","haberman.csv","spiral.csv","ecoli.csv",
-                "jain.csv", "mouse.csv", "smiley.csv", "wdbc.csv", "balance.csv",
-                "Blood.csv", "aggregation.csv"]
-
-dataset_List = ["aggregation.csv", "seeds.csv", "flame.csv","iris.csv"]
+dataset_List = ["aggregation.csv","aniso.csv","appendicitisNorm.csv", "balance.csv",
+                "banknote.csv", "blobs.csv","Blood.csv","circles.csv","diagnosis_II.csv",
+                "ecoli.csv","flame.csv","glass.csv","heart.csv","ionosphere.csv",
+                "iris.csv","iris2D.csv","jain.csv","liver.csv","moons.csv",
+                "mouse.csv","pathbased.csv","seeds.csv","smiley.csv","sonar.csv",
+                "varied.csv","vary-density.csv","vertebral2.csv","vertebral3.csv",
+                "wdbc.csv","wine.csv"]
+                
 
 dataset_len = len(dataset_List)
 
