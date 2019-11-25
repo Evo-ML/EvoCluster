@@ -5,7 +5,7 @@ Created on Sat Mar  9 18:50:48 2019
 @author: Raneem
 """
 
-from sklearn import metrics, preprocessing
+from sklearn import preprocessing
 
 import CSSA as cssa
 import CPSO as cpso
@@ -21,7 +21,6 @@ import objectives
 import measures
 import os
 import numpy
-import statistics as stat
 import warnings
 import time
 import csv
@@ -29,27 +28,66 @@ import csv
 warnings.simplefilter(action='ignore')
 
 
-def readDataset(directory, filename):
-    """
-    Reads the dataset file and store a list of Point ............
+# Select optimizers
+CSSA= False
+CPSO= True
+CGA= False
+CBAT= False
+CFFA=False
+CGWO=False
+CWOA=False
+CMVO=False
+CMFO=False
+CCS=False
 
-    Parameters
-    ----------
-    directory : str
-        The file location of the dataset
-    filename : str
-        The dataset file name
-
-    Returns
-    -------
-    N/A
-    """
-    myPath = os.path.abspath(os.path.dirname(__file__))
-    rawData = open(os.path.join(myPath, directory + filename), 'rt')
-    data = numpy.loadtxt(rawData, delimiter=",")
-    return data
+# Select objective function
+SSE=True
+TWCV=False
+SC=False
+DB=False
+#CH=True
+DI=False
 
 
+optimizer=[CSSA, CPSO, CGA, CBAT, CFFA, CGWO, CWOA, CMVO, CMFO, CCS]
+objectivefunc=[SSE, TWCV, SC, DB, DI] 
+        
+# Select number of repetitions for each experiment. 
+# To obtain meaningful statistical results, usually 30 independent runs 
+# are executed for each algorithm.
+NumOfRuns=1
+
+# Select general parameters for all optimizers (population size, number of iterations) ....
+PopulationSize = 50
+Iterations= 100
+
+#Export results ?
+Export=True
+Export_details=True
+
+#ExportToFile="YourResultsAreHere.csv"
+#Automaticly generated name by date and time
+ExportToFile="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+".csv" 
+ExportToFileDetails="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+"_details.csv" 
+ExportToFileDetailsLabels="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+"_details_Labels.csv" 
+
+# Check if it works at least once
+Flag=False
+Flag_details=False
+Flag_details_Labels=False
+
+# CSV Header for for the cinvergence 
+CnvgHeader=[]
+
+
+directory = "datasets/" # the directory where the dataset is stored
+dataset_List = ["aggregation.csv","aniso.csv","appendicitisNorm.csv", "balance.csv",
+                "banknote.csv", "blobs.csv","Blood.csv","circles.csv","diagnosis_II.csv",
+                "ecoli.csv","flame.csv","glass.csv","heart.csv","ionosphere.csv",
+                "iris.csv","iris2D.csv","jain.csv","liver.csv","moons.csv",
+                "mouse.csv","pathbased.csv","seeds.csv","smiley.csv","sonar.csv",
+                "varied.csv","vary-density.csv","vertebral2.csv","vertebral3.csv",
+                "wdbc.csv","wine.csv"]
 
 def selector(algo,func_details, k, f, popSize,Iter, points):
     function_name=func_details[0]
@@ -79,69 +117,6 @@ def selector(algo,func_details, k, f, popSize,Iter, points):
     return x
     
 
-# Select optimizers
-CSSA= False
-CPSO= False
-CGA= False
-CBAT= False
-CFFA=False
-CGWO=False
-CWOA=False
-CMVO=False
-CMFO=False
-CCS=True
-
-# Select objective function
-SSE=True
-TWCV=False
-SC=False
-DB=False
-#CH=True
-DI=False
-
-
-optimizer=[CSSA, CPSO, CGA, CBAT, CFFA, CGWO, CWOA, CMVO, CMFO, CCS]
-objectivefunc=[SSE, TWCV, SC, DB, DI] 
-        
-# Select number of repetitions for each experiment. 
-# To obtain meaningful statistical results, usually 30 independent runs 
-# are executed for each algorithm.
-NumOfRuns=10
-
-# Select general parameters for all optimizers (population size, number of iterations) ....
-PopulationSize = 50
-Iterations= 100
-directory = "datasets/" # the directory where the dataset is stored
-plot = False
-
-#Export results ?
-Export=True
-Export_details=True
-
-#ExportToFile="YourResultsAreHere.csv"
-#Automaticly generated name by date and time
-ExportToFile="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+".csv" 
-ExportToFileDetails="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+"_details.csv" 
-ExportToFileDetailsLabels="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+"_details_Labels.csv" 
-
-# Check if it works at least once
-Flag=False
-Flag_details=False
-Flag_details_Labels=False
-
-# CSV Header for for the cinvergence 
-CnvgHeader=[]
-
-
-dataset_List = ["aggregation.csv","aniso.csv","appendicitisNorm.csv", "balance.csv",
-                "banknote.csv", "blobs.csv","Blood.csv","circles.csv","diagnosis_II.csv",
-                "ecoli.csv","flame.csv","glass.csv","heart.csv","ionosphere.csv",
-                "iris.csv","iris2D.csv","jain.csv","liver.csv","moons.csv",
-                "mouse.csv","pathbased.csv","seeds.csv","smiley.csv","sonar.csv",
-                "varied.csv","vary-density.csv","vertebral2.csv","vertebral3.csv",
-                "wdbc.csv","wine.csv"]
-                
-
 dataset_len = len(dataset_List)
 
 k = [-1] * dataset_len
@@ -155,8 +130,10 @@ for l in range(0,Iterations):
 #read all datasets
 for h in range(dataset_len):
         
-    # Read the dataset file and generate the points list and true values
-    data = readDataset(directory, dataset_List[h])
+    # Read the dataset file and generate the points list and true values 
+    rawData = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), directory + dataset_List[h]), 'rt')
+    data = numpy.loadtxt(rawData, delimiter=",")
+    
     
     nPoints, nValues = data.shape #Number of points and Number of values for each point
     f[h] = nValues - 1 #Dimension value
@@ -220,36 +197,31 @@ for i in range (0, len(optimizer)):
                     objfname = x.objfname
                     
                     
-                    with open(ExportToFileDetailsLabels, 'a',newline='\n') as out_details_labels:
-                        writer_details = csv.writer(out_details_labels,delimiter=',')
-                        if (Flag_details_Labels==False): # just one time to write the header of the CSV file
-                            header_details= numpy.concatenate([["Dataset", "Optimizer","objfname"]])
-                            writer_details.writerow(header_details)
-                            Flag_details_Labels = True
-                        a=numpy.concatenate([[dataset_List[h], optimizerName, objfname],x.labelsPred])  
-                        writer_details.writerow(a)
-                    out_details_labels.close()
+                    if(Export_details==True):
+                        with open(ExportToFileDetailsLabels, 'a',newline='\n') as out_details_labels:
+                            writer_details = csv.writer(out_details_labels,delimiter=',')
+                            if (Flag_details_Labels==False): # just one time to write the header of the CSV file
+                                header_details= numpy.concatenate([["Dataset", "Optimizer","objfname"]])
+                                writer_details.writerow(header_details)
+                                Flag_details_Labels = True
+                            a=numpy.concatenate([[dataset_List[h], optimizerName, objfname],x.labelsPred])  
+                            writer_details.writerow(a)
+                        out_details_labels.close()
+                        
+                        with open(ExportToFileDetails, 'a',newline='\n') as out_details:
+                            writer_details = csv.writer(out_details,delimiter=',')
+                            if (Flag_details==False): # just one time to write the header of the CSV file
+                                header_details= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
+                                writer_details.writerow(header_details)
+                                Flag_details = True
+                            a=numpy.concatenate([[dataset_List[h], optimizerName, objfname, float("%0.2f"%(executionTime[z])), 
+                                  float("%0.2f"%(exSSE[z])), float("%0.2f"%(purity[z])), float("%0.2f"%(entropy[z])), float("%0.2f"%(HS[z])), 
+                                  float("%0.2f"%(CS[z])),  float("%0.2f"%(VM[z])),  float("%0.2f"%(AMI[z])),  float("%0.2f"%(ARI[z])), 
+                                  float("%0.2f"%(Fmeasure[z])),  float("%0.2f"%(exTWCV[z])),  float("%0.2f"%(SC[z])),  float("%0.2f"%(accuracy[z])),  float("%0.2f"%(DI[z])), 
+                                  float("%0.2f"%(DB[z])), float("%0.2f"%(stdev[z]))],numpy.around(convergence[z],decimals=2)])  
+                            writer_details.writerow(a)
+                        out_details.close()
                     
-                    with open(ExportToFileDetails, 'a',newline='\n') as out_details:
-                        writer_details = csv.writer(out_details,delimiter=',')
-                        if (Flag_details==False): # just one time to write the header of the CSV file
-                            header_details= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
-                            writer_details.writerow(header_details)
-                            Flag_details = True
-                        a=numpy.concatenate([[dataset_List[h], optimizerName, objfname, float("%0.2f"%(executionTime[z])), 
-                              float("%0.2f"%(exSSE[z])), float("%0.2f"%(purity[z])), float("%0.2f"%(entropy[z])), float("%0.2f"%(HS[z])), 
-                              float("%0.2f"%(CS[z])),  float("%0.2f"%(VM[z])),  float("%0.2f"%(AMI[z])),  float("%0.2f"%(ARI[z])), 
-                              float("%0.2f"%(Fmeasure[z])),  float("%0.2f"%(exTWCV[z])),  float("%0.2f"%(SC[z])),  float("%0.2f"%(accuracy[z])),  float("%0.2f"%(DI[z])), 
-                              float("%0.2f"%(DB[z])), float("%0.2f"%(stdev[z]))],numpy.around(convergence[z],decimals=2)])  
-                        writer_details.writerow(a)
-                    out_details.close()
-                    '''    
-                    print(dataset_List[h] + "," + optimizerName + "," + objfname + "," + str(executionTime[z]) + "," + 
-                          str(exSSE[z]) + "," + str(purity[z]) + "," + str(entropy[z]) + "," + str(HS[z]) + "," + 
-                          str(CS[z]) + "," +  str(VM[z]) + "," +  str(AMI[z]) + "," +  str(ARI[z]) + "," + 
-                          str(Fmeasure[z]) + "," +  str(exTWCV[z]) + "," +  str(SC[z]) + "," +  str(accuracy[z]) + "," +  str(DI[z]) + "," + 
-                          str(DB[z]) + "," +  str(stdev[z]) + "," + ",".join(str(x) for x in convergence[z]))
-                    '''
             
                 if(Export==True):
                     with open(ExportToFile, 'a',newline='\n') as out:
