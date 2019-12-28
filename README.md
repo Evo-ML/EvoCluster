@@ -2,9 +2,7 @@
 
 ### Beta Version ###
 
-EvoCluster is an open source and cross-platform framework imple-mented in Python which includes the most well-known and recent nature-inspiredmetaheuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customiz-able implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the imple-mentation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation  of  the  framework  includes  ten  metaheristic  optimizers,  thirtydatasets,  five  objective  functions,  and  twelve  evaluation  measures.  The  source code of EvoCluster is publicly available at (http://evo-ml.com/2019/10/25/evocluster/).
-
-
+EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation  of  the  framework  includes  ten  metaheristic  optimizers,  thirtydatasets,  five  objective  functions,  and  twelve  evaluation  measures.  The  source code of EvoCluster is publicly available at (http://evo-ml.com/2019/10/25/evocluster/).
 
 The full list of implemented optimizers is available here https://github.com/7ossam81/EvoloPy/wiki/List-of-optimizers
 
@@ -28,7 +26,7 @@ Run
 That command above will install  `sklearn`, `NumPy` and `SciPy` for
 you.
 
-- If you are installing EvoloPy-FS onto Windows, please Install Anaconda from here https://www.continuum.io/downloads, which is the leading open data science platform powered by Python.
+- If you are installing EvoCluster onto Windows, please Install Anaconda from here https://www.continuum.io/downloads, which is the leading open data science platform powered by Python.
 - If you are installing onto Ubuntu or Debian and using Python 3 then
   this will pull in all the dependencies from the repositories:
   
@@ -42,7 +40,7 @@ Clone the Git repository from GitHub
 
 
 ## Quick User Guide
-EvoCluster Framework contains more than six datasets (All of them are obtainied from UCI repository). 
+EvoCluster Framework contains more than thirty datasets (Obtainied from UCI repository, scikit learn, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris). 
 The main file is the main.py, which considered the interface of the framewok. In the main.py you 
 can setup your experiment by selecting the optmizers, the datasets, number of runs, number of iterations, number of neurons
 and population size. The following is a sample example to use the EvoCluster framework.
@@ -58,7 +56,7 @@ MFO= False
 
 After that, Select datasets:
 
-datasets=["BreastCancer", "iris"]
+datasets=["aggregation.csv", "seeds.csv"]
 
 The folder datasets in the repositoriy contains 3 binary datasets (All of them are obtained from UCI repository).
 
@@ -68,9 +66,9 @@ To add new dataset:
 - Place the new datset files in the datasets folder.
 - Add the dataset to the datasets list in the main.py (Line 18).
   
-  For example, if the dastaset name is Seed, the new line  will be like this:
+  For example, if the dastaset name is seed, the new line  will be like this:
         
-        datasets=["BreastCancer", "iris", "Seed"]
+        datasets=["aggregation.csv", "seeds.csv"]
 
 
 Change NumOfRuns, PopulationSize, and Iterations variables as you want:
