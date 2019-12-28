@@ -1,10 +1,8 @@
-### EvoCluster: An Open-Source Nature-InspiredOptimization Clustering Framework in Python
+### EvoCluster: An Open-Source Nature-Inspired Optimization Clustering Framework in Python
 
 ### Beta Version ###
 
 EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation  of  the  framework  includes  ten  metaheristic  optimizers,  thirtydatasets,  five  objective  functions,  and  twelve  evaluation  measures.  The  source code of EvoCluster is publicly available at (http://evo-ml.com/2019/10/25/evocluster/).
-
-
 
 The full list of implemented optimizers is available here https://github.com/7ossam81/EvoloPy/wiki/List-of-optimizers
 
@@ -87,7 +85,6 @@ The results will be automaticly generated in excel file called Experiment which 
 The results file contains the following measures:
 
 
-    Optimizer	Dataset	objfname	Experiment	startTime	EndTime	ExecutionTime	trainAcc	testAcc
     Optimizer: The name of the used optimizer
     Dataset: The name of the dataset.
     objfname: The objective function/ Fitness function
