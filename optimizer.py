@@ -45,7 +45,6 @@ SSE=True
 TWCV=False
 SC=False
 DB=False
-#CH=True
 DI=False
 
 
@@ -55,7 +54,7 @@ objectivefunc=[SSE, TWCV, SC, DB, DI]
 # Select number of repetitions for each experiment. 
 # To obtain meaningful statistical results, usually 30 independent runs 
 # are executed for each algorithm.
-NumOfRuns=1
+NumOfRuns=30
 
 # Select general parameters for all optimizers (population size, number of iterations) ....
 PopulationSize = 50
