@@ -8,7 +8,6 @@ Created on Fri Mar 15 21:04:15 2019
 import random
 import numpy
 import math
-from colorama import Fore, Back, Style
 from solution import solution
 import time
 
