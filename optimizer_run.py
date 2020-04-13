@@ -116,11 +116,11 @@ def run_optimizer(optimizer, objectivefunc, dataset_List, NumOfRuns, params, exp
 			    for h in range(len(dataset_List)):
 			    	HS = [0]*NumOfRuns
 			    	CS = [0]*NumOfRuns
-					VM = [0]*NumOfRuns 
-					AMI = [0]*NumOfRuns 
-					ARI = [0]*NumOfRuns    
-					Fmeasure = [0]*NumOfRuns   
-					SC = [0]*NumOfRuns   
+			    	VM = [0]*NumOfRuns 
+					AMI = [0]*NumOfRuns
+					ARI = [0]*NumOfRuns   
+					Fmeasure = [0]*NumOfRuns
+					SC = [0]*NumOfRuns
 					accuracy = [0]*NumOfRuns   
 					DI = [0]*NumOfRuns   
 					DB = [0]*NumOfRuns   
