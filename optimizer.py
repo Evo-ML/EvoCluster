@@ -8,25 +8,6 @@ Created on Sat Mar  9 18:50:48 2019
 from sklearn import preprocessing
 
 from optimizer_run import run
-import CSSA as cssa
-import CPSO as cpso
-import CGA as cga
-import CBAT as cbat
-import CFFA as cffa
-import CGWO as cgwo
-import CWOA as cwoa
-import CMVO as cmvo
-import CMFO as cmfo
-import CCS as ccs
-import objectives
-import measures
-import os
-import numpy
-import warnings
-import time
-import csv
-
-warnings.simplefilter(action='ignore')
 
 # Select optimizers
 CSSA= False
