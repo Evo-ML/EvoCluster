@@ -146,7 +146,6 @@ def SSE(individual, labelsPred, k, points):
     centroidsForPoints = startpts[labelsPred]
     fitnessValues = numpy.linalg.norm(points-centroidsForPoints, axis = 1)**2
     fitness = sum(fitnessValues)
-    print("SSE:",fitness)
     return fitness
 
 
