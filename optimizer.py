@@ -167,6 +167,7 @@ for i in range (0, len(optimizer)):
                 #Agg = [0]*NumOfRuns
                 
                 for z in range (0,NumOfRuns):
+                    print("Dataset: " + dataset_List[h])
                     print("Run no.: " + str(z)) 
                     
                     func_details=objectives.getFunctionDetails(j)
