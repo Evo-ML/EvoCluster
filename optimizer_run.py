@@ -114,112 +114,112 @@ def run_optimizer(optimizer, objectivefunc, dataset_List, NumOfRuns, params, exp
 		for j in range (0, len(objectivefunc)):
 			if((optimizer[i]==True) and (objectivefunc[j]==True)): # start experiment if an optimizer and an objective function is selected
 			    for h in range(len(dataset_List)):     
-					HS = [0]*NumOfRuns     
-					CS = [0]*NumOfRuns
-					VM = [0]*NumOfRuns 
-					AMI = [0]*NumOfRuns 
-					ARI = [0]*NumOfRuns    
-					Fmeasure = [0]*NumOfRuns   
-					SC = [0]*NumOfRuns   
-					accuracy = [0]*NumOfRuns   
-					DI = [0]*NumOfRuns   
-					DB = [0]*NumOfRuns   
-					stdev = [0]*NumOfRuns   
-					exSSE = [0]*NumOfRuns 
-					exTWCV = [0]*NumOfRuns
-					purity = [0]*NumOfRuns
-					entropy = [0]*NumOfRuns
-					convergence = [0]*NumOfRuns
-					executionTime = [0]*NumOfRuns
-					#Agg = [0]*NumOfRuns
+				HS = [0]*NumOfRuns     
+				CS = [0]*NumOfRuns
+				VM = [0]*NumOfRuns 
+				AMI = [0]*NumOfRuns 
+				ARI = [0]*NumOfRuns    
+				Fmeasure = [0]*NumOfRuns   
+				SC = [0]*NumOfRuns   
+				accuracy = [0]*NumOfRuns   
+				DI = [0]*NumOfRuns   
+				DB = [0]*NumOfRuns   
+				stdev = [0]*NumOfRuns   
+				exSSE = [0]*NumOfRuns 
+				exTWCV = [0]*NumOfRuns
+				purity = [0]*NumOfRuns
+				entropy = [0]*NumOfRuns
+				convergence = [0]*NumOfRuns
+				executionTime = [0]*NumOfRuns
+				#Agg = [0]*NumOfRuns
 					
-					for z in range (0,NumOfRuns):
-						print("Dataset: " + dataset_List[h])
-						print("Run no.: " + str(z)) 
+				for z in range (0,NumOfRuns):
+					print("Dataset: " + dataset_List[h])
+					print("Run no.: " + str(z)) 
+					
+					func_details=objectives.getFunctionDetails(j)
+					x=selector(i,func_details, k[h], f[h], PopulationSize,Iterations, points[h])
 						
-						func_details=objectives.getFunctionDetails(j)
-						x=selector(i,func_details, k[h], f[h], PopulationSize,Iterations, points[h])
+					
+					HS[z] = measures.HS(labelsTrue[h],x.labelsPred)
+					CS[z] = measures.CS(labelsTrue[h],x.labelsPred)
+					VM[z] = measures.VM(labelsTrue[h],x.labelsPred)
+					AMI[z] = measures.AMI(labelsTrue[h],x.labelsPred)
+					ARI[z] = measures.ARI(labelsTrue[h],x.labelsPred)
+					Fmeasure[z] = measures.Fmeasure(labelsTrue[h],x.labelsPred)
+					SC[z] = measures.SC(points[h],x.labelsPred)
+					accuracy[z] = measures.accuracy(labelsTrue[h],x.labelsPred)
+					DI[z] = measures.DI(points[h], x.labelsPred)
+					DB[z] = measures.DB(points[h], x.labelsPred)
+					stdev[z] = measures.stdev(x.bestIndividual,x.labelsPred, k[h], points[h])
+					exSSE[z] = measures.SSE(x.bestIndividual, x.labelsPred, k[h], points[h])
+					exTWCV[z] = measures.TWCV(x.bestIndividual, x.labelsPred, k[h], points[h])
+					purity[z] = measures.purity(labelsTrue[h],x.labelsPred)
+					entropy[z] = measures.entropy(labelsTrue[h],x.labelsPred)
+					#Agg[z] = float("%0.2f"%(float("%0.2f"%(HS[z] + CS[z] + VM[z] + AMI[z] + ARI[z])) / 5))
 						
+					executionTime[z] = x.executionTime
+					convergence[z] = x.convergence
+					optimizerName = x.optimizer
+					objfname = x.objfname
+					
+					
+					if(Export_details==True):
+						with open(ExportToFileDetailsLabels, 'a',newline='\n') as out_details_labels:
+							writer_details = csv.writer(out_details_labels,delimiter=',')
+							if (Flag_details_Labels==False): # just one time to write the header of the CSV file
+								header_details= numpy.concatenate([["Dataset", "Optimizer","objfname"]])
+								writer_details.writerow(header_details)
+								Flag_details_Labels = True
+							a=numpy.concatenate([[dataset_List[h], optimizerName, objfname],x.labelsPred])  
+							writer_details.writerow(a)
+						out_details_labels.close()
 						
-						HS[z] = measures.HS(labelsTrue[h],x.labelsPred)
-						CS[z] = measures.CS(labelsTrue[h],x.labelsPred)
-						VM[z] = measures.VM(labelsTrue[h],x.labelsPred)
-						AMI[z] = measures.AMI(labelsTrue[h],x.labelsPred)
-						ARI[z] = measures.ARI(labelsTrue[h],x.labelsPred)
-						Fmeasure[z] = measures.Fmeasure(labelsTrue[h],x.labelsPred)
-						SC[z] = measures.SC(points[h],x.labelsPred)
-						accuracy[z] = measures.accuracy(labelsTrue[h],x.labelsPred)
-						DI[z] = measures.DI(points[h], x.labelsPred)
-						DB[z] = measures.DB(points[h], x.labelsPred)
-						stdev[z] = measures.stdev(x.bestIndividual,x.labelsPred, k[h], points[h])
-						exSSE[z] = measures.SSE(x.bestIndividual, x.labelsPred, k[h], points[h])
-						exTWCV[z] = measures.TWCV(x.bestIndividual, x.labelsPred, k[h], points[h])
-						purity[z] = measures.purity(labelsTrue[h],x.labelsPred)
-						entropy[z] = measures.entropy(labelsTrue[h],x.labelsPred)
-						#Agg[z] = float("%0.2f"%(float("%0.2f"%(HS[z] + CS[z] + VM[z] + AMI[z] + ARI[z])) / 5))
-						
-						executionTime[z] = x.executionTime
-						convergence[z] = x.convergence
-						optimizerName = x.optimizer
-						objfname = x.objfname
-						
-						
-						if(Export_details==True):
-							with open(ExportToFileDetailsLabels, 'a',newline='\n') as out_details_labels:
-								writer_details = csv.writer(out_details_labels,delimiter=',')
-								if (Flag_details_Labels==False): # just one time to write the header of the CSV file
-									header_details= numpy.concatenate([["Dataset", "Optimizer","objfname"]])
-									writer_details.writerow(header_details)
-									Flag_details_Labels = True
-								a=numpy.concatenate([[dataset_List[h], optimizerName, objfname],x.labelsPred])  
-								writer_details.writerow(a)
-							out_details_labels.close()
-							
-							with open(ExportToFileDetails, 'a',newline='\n') as out_details:
-								writer_details = csv.writer(out_details,delimiter=',')
-								if (Flag_details==False): # just one time to write the header of the CSV file
-									header_details= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
-									writer_details.writerow(header_details)
-									Flag_details = True
-								a=numpy.concatenate([[dataset_List[h], optimizerName, objfname, float("%0.2f"%(executionTime[z])), 
-									  float("%0.2f"%(exSSE[z])), float("%0.2f"%(purity[z])), float("%0.2f"%(entropy[z])), float("%0.2f"%(HS[z])), 
-									  float("%0.2f"%(CS[z])),  float("%0.2f"%(VM[z])),  float("%0.2f"%(AMI[z])),  float("%0.2f"%(ARI[z])), 
-									  float("%0.2f"%(Fmeasure[z])),  float("%0.2f"%(exTWCV[z])),  float("%0.2f"%(SC[z])),  float("%0.2f"%(accuracy[z])),  float("%0.2f"%(DI[z])), 
-									  float("%0.2f"%(DB[z])), float("%0.2f"%(stdev[z]))],numpy.around(convergence[z],decimals=2)])  
-								writer_details.writerow(a)
-							out_details.close()
-						
+						with open(ExportToFileDetails, 'a',newline='\n') as out_details:
+							writer_details = csv.writer(out_details,delimiter=',')
+							if (Flag_details==False): # just one time to write the header of the CSV file
+								header_details= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
+								writer_details.writerow(header_details)
+								Flag_details = True
+							a=numpy.concatenate([[dataset_List[h], optimizerName, objfname, float("%0.2f"%(executionTime[z])), 
+								  float("%0.2f"%(exSSE[z])), float("%0.2f"%(purity[z])), float("%0.2f"%(entropy[z])), float("%0.2f"%(HS[z])), 
+								  float("%0.2f"%(CS[z])),  float("%0.2f"%(VM[z])),  float("%0.2f"%(AMI[z])),  float("%0.2f"%(ARI[z])), 
+								  float("%0.2f"%(Fmeasure[z])),  float("%0.2f"%(exTWCV[z])),  float("%0.2f"%(SC[z])),  float("%0.2f"%(accuracy[z])),  float("%0.2f"%(DI[z])), 
+								  float("%0.2f"%(DB[z])), float("%0.2f"%(stdev[z]))],numpy.around(convergence[z],decimals=2)])  
+							writer_details.writerow(a)
+						out_details.close()
+					
 				
-					if(Export==True):
-						with open(ExportToFile, 'a',newline='\n') as out:
-							writer = csv.writer(out,delimiter=',')
-							if (Flag==False): # just one time to write the header of the CSV file
-								header= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
-								writer.writerow(header)
+				if(Export==True):
+					with open(ExportToFile, 'a',newline='\n') as out:
+						writer = csv.writer(out,delimiter=',')
+						if (Flag==False): # just one time to write the header of the CSV file
+							header= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
+							writer.writerow(header)
 											
-							avgSSE = str(float("%0.2f"%(sum(exSSE) / NumOfRuns)))
-							avgTWCV = str(float("%0.2f"%(sum(exTWCV) / NumOfRuns)))
-							avgPurity = str(float("%0.2f"%(sum(purity) / NumOfRuns)))
-							avgEntropy = str(float("%0.2f"%(sum(entropy) / NumOfRuns)))
-							avgHomo = str(float("%0.2f"%(sum(HS) / NumOfRuns)))
-							avgComp = str(float("%0.2f"%(sum(CS) / NumOfRuns)))
-							avgVmeas = str(float("%0.2f"%(sum(VM) / NumOfRuns)))
-							avgAMI = str(float("%0.2f"%(sum(AMI) / NumOfRuns)))
-							avgARI = str(float("%0.2f"%(sum(ARI) / NumOfRuns)))
-							avgFmeasure = str(float("%0.2f"%(sum(Fmeasure) / NumOfRuns)))
-							avgSC = str(float("%0.2f"%(sum(SC) / NumOfRuns)))
-							avgAccuracy = str(float("%0.2f"%(sum(accuracy) / NumOfRuns)))
-							avgDI = str(float("%0.2f"%(sum(DI) / NumOfRuns)))
-							avgDB = str(float("%0.2f"%(sum(DB) / NumOfRuns)) )    
-							avgStdev = str(float("%0.2f"%(sum(stdev) / NumOfRuns)))                
-							#avgAgg = str(float("%0.2f"%(sum(Agg) / NumOfRuns)))
+						avgSSE = str(float("%0.2f"%(sum(exSSE) / NumOfRuns)))
+						avgTWCV = str(float("%0.2f"%(sum(exTWCV) / NumOfRuns)))
+						avgPurity = str(float("%0.2f"%(sum(purity) / NumOfRuns)))
+						avgEntropy = str(float("%0.2f"%(sum(entropy) / NumOfRuns)))
+						avgHomo = str(float("%0.2f"%(sum(HS) / NumOfRuns)))
+						avgComp = str(float("%0.2f"%(sum(CS) / NumOfRuns)))
+						avgVmeas = str(float("%0.2f"%(sum(VM) / NumOfRuns)))
+						avgAMI = str(float("%0.2f"%(sum(AMI) / NumOfRuns)))
+						avgARI = str(float("%0.2f"%(sum(ARI) / NumOfRuns)))
+						avgFmeasure = str(float("%0.2f"%(sum(Fmeasure) / NumOfRuns)))
+						avgSC = str(float("%0.2f"%(sum(SC) / NumOfRuns)))
+						avgAccuracy = str(float("%0.2f"%(sum(accuracy) / NumOfRuns)))
+						avgDI = str(float("%0.2f"%(sum(DI) / NumOfRuns)))
+						avgDB = str(float("%0.2f"%(sum(DB) / NumOfRuns)) )    
+						avgStdev = str(float("%0.2f"%(sum(stdev) / NumOfRuns)))                
+						#avgAgg = str(float("%0.2f"%(sum(Agg) / NumOfRuns)))
 							
-							avgExecutionTime = float("%0.2f"%(sum(executionTime) / NumOfRuns))
-							avgConvergence = numpy.around(numpy.mean(convergence, axis=0, dtype=numpy.float64), decimals=2).tolist()
-							a=numpy.concatenate([[dataset_List[h], optimizerName,objfname,avgExecutionTime,avgSSE,avgPurity,avgEntropy,avgHomo, avgComp, avgVmeas, avgAMI, avgARI, avgFmeasure, avgTWCV, avgSC, avgAccuracy, avgDI, avgDB, avgStdev],avgConvergence])
-							writer.writerow(a)
-						out.close()
-					Flag=True # at least one experiment
+						avgExecutionTime = float("%0.2f"%(sum(executionTime) / NumOfRuns))
+						avgConvergence = numpy.around(numpy.mean(convergence, axis=0, dtype=numpy.float64), decimals=2).tolist()
+						a=numpy.concatenate([[dataset_List[h], optimizerName,objfname,avgExecutionTime,avgSSE,avgPurity,avgEntropy,avgHomo, avgComp, avgVmeas, avgAMI, avgARI, avgFmeasure, avgTWCV, avgSC, avgAccuracy, avgDI, avgDB, avgStdev],avgConvergence])
+						writer.writerow(a)
+					out.close()
+				Flag=True # at least one experiment
 						
 	if (Flag==False): # Faild to run at least one experiment
 		print("No Optomizer or Cost function is selected. Check lists of available optimizers and cost functions") 
