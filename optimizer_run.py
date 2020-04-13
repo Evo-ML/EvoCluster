@@ -134,6 +134,7 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	                #Agg = [0]*NumOfRuns
 	                
 	                for z in range (0,NumOfRuns):
+	                	print()
 	                    print("Dataset: " + dataset_List[h])
 	                    print("Run no.: " + str(z)) 
 	                    
