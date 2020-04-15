@@ -29,7 +29,7 @@ warnings.simplefilter(action='ignore')
 
 def selector(algo,func_details, k, f, popSize,Iter, points):
 	run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags): 
-	"""
+	'''
 	This is used to call the algorithm which is selected
 
 	Parameters
@@ -53,7 +53,7 @@ def selector(algo,func_details, k, f, popSize,Iter, points):
 	-----------
 	obj
 	     x: solution object returned by the selected algorithm
-	"""
+	'''
 	function_name=func_details[0]
 	lb=0
 	ub=1
@@ -80,9 +80,8 @@ def selector(algo,func_details, k, f, popSize,Iter, points):
 		x=ccs.CS(getattr(objectives, function_name),lb,ub,k * f,popSize,Iter, k, points)        
 	return x
 		
-def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags):
-	
-	"""
+def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags):	
+	'''
 	It serves as the main interface of the framework for running the experiments.
 
 	Parameters
@@ -107,7 +106,7 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	Returns
 	-----------
 	N/A
-	"""
+	'''
 	
 	# Select general parameters for all optimizers (population size, number of iterations) ....
 	PopulationSize = params['PopulationSize']
