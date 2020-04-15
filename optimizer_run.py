@@ -28,6 +28,32 @@ import csv
 warnings.simplefilter(action='ignore')
 
 def selector(algo,func_details, k, f, popSize,Iter, points):
+	run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags): 
+	"""
+	This is used to call the algorithm which is selected
+
+	Parameters
+	----------
+	algo : int
+	     The index of the selected algorithm
+	func_details : dict
+	     consists of the details of the selected function
+	k : int
+	     Number of clusters
+	f : int
+	     Number of features
+	popSize : int
+	     Size of population (the number of individuals at each iteration)
+	Iter : int
+	     The number of iterations
+	points : numpy.ndaarray
+	     The attribute values of all the points
+
+	Returns
+	-----------
+	obj
+	     x: solution object returned by the selected algorithm
+	"""
 	function_name=func_details[0]
 	lb=0
 	ub=1
@@ -56,7 +82,33 @@ def selector(algo,func_details, k, f, popSize,Iter, points):
 		
 def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags):
 	
+	"""
+	It serves as the main interface of the framework for running the experiments.
 
+	Parameters
+	----------    
+	optimizer : list
+	    The list of boolean preference of optimizers
+	objectivefunc : list
+	    The list of boolean preference of objective functions
+	dataset_List : list
+	    The list of the names of the data sets files
+	NumOfRuns : int
+	    The number of independent runs 
+	params  : set
+	    The set of parameters which are: 
+	    1. Size of population (PopulationSize)
+	    2. The number of iterations (Iterations)
+	export_flags : set
+	    The set of Boolean flags which are: 
+	    1. Export (Exporting the results in a file)
+	    2. Export_details (Exporting the detailed results in files)
+
+	Returns
+	-----------
+	N/A
+	"""
+	
 	# Select general parameters for all optimizers (population size, number of iterations) ....
 	PopulationSize = params['PopulationSize']
 	Iterations= params['Iterations']
