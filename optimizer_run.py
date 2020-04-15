@@ -28,7 +28,7 @@ import csv
 warnings.simplefilter(action='ignore')
 
 def selector(algo,func_details, k, f, popSize,Iter, points):
-	'''
+	"""
 	This is used to call the algorithm which is selected
 
 	Parameters
@@ -52,7 +52,7 @@ def selector(algo,func_details, k, f, popSize,Iter, points):
 	-----------
 	obj
 	     x: solution object returned by the selected algorithm
-	'''
+	"""
 	function_name=func_details[0]
 	lb=0
 	ub=1

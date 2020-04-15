@@ -12,7 +12,7 @@ from optimizer_run import run
 # Select optimizers
 CSSA= False
 CPSO= True
-CGA= False
+CGA= True
 CBAT= False
 CFFA=False
 CGWO=False
@@ -23,7 +23,7 @@ CCS=False
 optimizer=[CSSA, CPSO, CGA, CBAT, CFFA, CGWO, CWOA, CMVO, CMFO, CCS]
 
 # Select objective function
-SSE=False
+SSE=True
 TWCV=True
 SC=False
 DB=False
@@ -31,7 +31,7 @@ DI=False
 objectivefunc=[SSE, TWCV, SC, DB, DI] 
 
 # Select data sets
-dataset_List = ["iris.csv"]
+dataset_List = ["iris.csv","aggregation.csv"]
 '''
 dataset_List = ["aggregation.csv","aniso.csv","appendicitisNorm.csv", "balance.csv",
                 "banknote.csv", "blobs.csv","Blood.csv","circles.csv","diagnosis_II.csv",
