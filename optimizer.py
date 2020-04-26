@@ -24,14 +24,14 @@ optimizer=[CSSA, CPSO, CGA, CBAT, CFFA, CGWO, CWOA, CMVO, CMFO, CCS]
 
 # Select objective function
 SSE=True
-TWCV=True
+TWCV=False
 SC=False
 DB=False
 DI=False
 objectivefunc=[SSE, TWCV, SC, DB, DI] 
 
 # Select data sets
-dataset_List = ["iris.csv","aggregation.csv"]
+dataset_List = ["iris.csv","flame.csv"]
 '''
 dataset_List = ["aggregation.csv","aniso.csv","appendicitisNorm.csv", "balance.csv",
                 "banknote.csv", "blobs.csv","Blood.csv","circles.csv","diagnosis_II.csv",
@@ -50,6 +50,7 @@ NumOfRuns=3
 params = {'PopulationSize' : 50, 'Iterations' : 100}
 
 #Export results?
-export_flags = {'Export_avg':True,'Export_details':True}
+export_flags = {'Export_avg':True, 'Export_details':True, 'Export_details_labels':True, 
+'Export_convergence':True, 'Export_boxplot':True}
 
 run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)

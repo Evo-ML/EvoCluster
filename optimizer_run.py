@@ -6,6 +6,7 @@ Created on Sat Mar  9 18:50:48 2019
 """
 
 from sklearn import preprocessing
+from pathlib import Path
 
 import CSSA as cssa
 import CPSO as cpso
@@ -24,6 +25,8 @@ import numpy
 import warnings
 import time
 import csv
+import plot_convergence_run as conv_plot
+import plot_boxplot_run as box_plot
 
 warnings.simplefilter(action='ignore')
 
@@ -102,6 +105,9 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	    The set of Boolean flags which are: 
 	    1. Export (Exporting the results in a file)
 	    2. Export_details (Exporting the detailed results in files)
+	    3. Export_details_labels (Exporting the labels detailed results in files)
+	    4. Export_convergence (Exporting the covergence plots)
+	    5. Export_boxplot (Exporting the box plots)
 
 	Returns
 	-----------
@@ -115,12 +121,11 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	#Export results ?
 	Export=export_flags['Export_avg']
 	Export_details=export_flags['Export_details']
+	Export_details_labels = export_flags['Export_details_labels']
+	Export_convergence = export_flags['Export_convergence']
+	Export_boxplot = export_flags['Export_boxplot']
 
-	#ExportToFile="YourResultsAreHere.csv"
 	#Automaticly generated name by date and time
-	ExportToFile="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+".csv" 
-	ExportToFileDetails="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+"_details.csv" 
-	ExportToFileDetailsLabels="experiment "+time.strftime("%Y-%m-%d-%H-%M-%S")+"_details_Labels.csv" 
 
 	# Check if it works at least once
 	Flag=False
@@ -131,8 +136,9 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	CnvgHeader=[]
 
 
-	directory = "datasets/" # the directory where the dataset is stored
-	
+	datasets_directory = "datasets/" # the directory where the dataset is stored
+	results_directory = time.strftime("%Y-%m-%d-%H-%M-%S") + '/'
+	Path(results_directory).mkdir(parents=True, exist_ok=True)
 
 	dataset_len = len(dataset_List)
 
@@ -148,7 +154,7 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	for h in range(dataset_len):
 			
 		# Read the dataset file and generate the points list and true values 
-		rawData = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), directory + dataset_List[h]), 'rt')
+		rawData = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), datasets_directory + dataset_List[h]), 'rt')
 		data = numpy.loadtxt(rawData, delimiter=",")
 		
 		
@@ -160,6 +166,7 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 		
 		#points =(preprocessing.normalize(points, norm='max', axis=0) * 200) - 100
 		points[h] =preprocessing.normalize(points[h], norm='max', axis=0)
+
 
 	for i in range (0, len(optimizer)):
 	    for j in range (0, len(objectivefunc)):
@@ -213,10 +220,12 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	                    convergence[z] = x.convergence
 	                    optimizerName = x.optimizer
 	                    objfname = x.objfname
-	                    
-	                    
-	                    if(Export_details==True):
-	                        with open(ExportToFileDetailsLabels, 'a',newline='\n') as out_details_labels:
+
+
+
+	                    if(Export_details_labels==True):
+	                    	ExportToFileDetailsLabels=results_directory + "experiment_details_Labels.csv"
+	                    	with open(ExportToFileDetailsLabels, 'a',newline='\n') as out_details_labels:
 	                            writer_details = csv.writer(out_details_labels,delimiter=',')
 	                            if (Flag_details_Labels==False): # just one time to write the header of the CSV file
 	                                header_details= numpy.concatenate([["Dataset", "Optimizer","objfname"]])
@@ -224,8 +233,10 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	                                Flag_details_Labels = True
 	                            a=numpy.concatenate([[dataset_List[h], optimizerName, objfname],x.labelsPred])  
 	                            writer_details.writerow(a)
-	                        out_details_labels.close()
-	                        
+	                    	out_details_labels.close()                            
+
+	                    if(Export_details==True):
+	                        ExportToFileDetails=results_directory + "experiment_details.csv"
 	                        with open(ExportToFileDetails, 'a',newline='\n') as out_details:
 	                            writer_details = csv.writer(out_details,delimiter=',')
 	                            if (Flag_details==False): # just one time to write the header of the CSV file
@@ -242,35 +253,44 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 	                    
 	            
 	                if(Export==True):
-	                    with open(ExportToFile, 'a',newline='\n') as out:
-	                        writer = csv.writer(out,delimiter=',')
-	                        if (Flag==False): # just one time to write the header of the CSV file
-	                            header= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
-	                            writer.writerow(header)
-	                                        
-	                        avgSSE = str(float("%0.2f"%(sum(exSSE) / NumOfRuns)))
-	                        avgTWCV = str(float("%0.2f"%(sum(exTWCV) / NumOfRuns)))
-	                        avgPurity = str(float("%0.2f"%(sum(purity) / NumOfRuns)))
-	                        avgEntropy = str(float("%0.2f"%(sum(entropy) / NumOfRuns)))
-	                        avgHomo = str(float("%0.2f"%(sum(HS) / NumOfRuns)))
-	                        avgComp = str(float("%0.2f"%(sum(CS) / NumOfRuns)))
-	                        avgVmeas = str(float("%0.2f"%(sum(VM) / NumOfRuns)))
-	                        avgAMI = str(float("%0.2f"%(sum(AMI) / NumOfRuns)))
-	                        avgARI = str(float("%0.2f"%(sum(ARI) / NumOfRuns)))
-	                        avgFmeasure = str(float("%0.2f"%(sum(Fmeasure) / NumOfRuns)))
-	                        avgSC = str(float("%0.2f"%(sum(SC) / NumOfRuns)))
-	                        avgAccuracy = str(float("%0.2f"%(sum(accuracy) / NumOfRuns)))
-	                        avgDI = str(float("%0.2f"%(sum(DI) / NumOfRuns)))
-	                        avgDB = str(float("%0.2f"%(sum(DB) / NumOfRuns)) )    
-	                        avgStdev = str(float("%0.2f"%(sum(stdev) / NumOfRuns)))                
-	                        #avgAgg = str(float("%0.2f"%(sum(Agg) / NumOfRuns)))
-	                        
-	                        avgExecutionTime = float("%0.2f"%(sum(executionTime) / NumOfRuns))
-	                        avgConvergence = numpy.around(numpy.mean(convergence, axis=0, dtype=numpy.float64), decimals=2).tolist()
-	                        a=numpy.concatenate([[dataset_List[h], optimizerName,objfname,avgExecutionTime,avgSSE,avgPurity,avgEntropy,avgHomo, avgComp, avgVmeas, avgAMI, avgARI, avgFmeasure, avgTWCV, avgSC, avgAccuracy, avgDI, avgDB, avgStdev],avgConvergence])
-	                        writer.writerow(a)
-	                    out.close()
+	                	ExportToFile=results_directory + "experiment.csv"
+
+	                	with open(ExportToFile, 'a',newline='\n') as out:
+	                		writer = csv.writer(out,delimiter=',')
+	                		if (Flag==False): # just one time to write the header of the CSV file
+	                			header= numpy.concatenate([["Dataset", "Optimizer","objfname","ExecutionTime","SSE","Purity","Entropy","HS","CS","VM","AMI","ARI","Fmeasure","TWCV","SC","Accuracy","DI","DB","STDev"],CnvgHeader])
+	                			writer.writerow(header)
+
+	                		avgSSE = str(float("%0.2f"%(sum(exSSE) / NumOfRuns)))
+	                		avgTWCV = str(float("%0.2f"%(sum(exTWCV) / NumOfRuns)))
+	                		avgPurity = str(float("%0.2f"%(sum(purity) / NumOfRuns)))
+	                		avgEntropy = str(float("%0.2f"%(sum(entropy) / NumOfRuns)))
+	                		avgHomo = str(float("%0.2f"%(sum(HS) / NumOfRuns)))
+	                		avgComp = str(float("%0.2f"%(sum(CS) / NumOfRuns)))
+	                		avgVmeas = str(float("%0.2f"%(sum(VM) / NumOfRuns)))
+	                		avgAMI = str(float("%0.2f"%(sum(AMI) / NumOfRuns)))
+	                		avgARI = str(float("%0.2f"%(sum(ARI) / NumOfRuns)))
+	                		avgFmeasure = str(float("%0.2f"%(sum(Fmeasure) / NumOfRuns)))
+	                		avgSC = str(float("%0.2f"%(sum(SC) / NumOfRuns)))
+	                		avgAccuracy = str(float("%0.2f"%(sum(accuracy) / NumOfRuns)))
+	                		avgDI = str(float("%0.2f"%(sum(DI) / NumOfRuns)))
+	                		avgDB = str(float("%0.2f"%(sum(DB) / NumOfRuns)) )    
+	                		avgStdev = str(float("%0.2f"%(sum(stdev) / NumOfRuns)))                
+	                		#avgAgg = str(float("%0.2f"%(sum(Agg) / NumOfRuns)))
+
+	                		avgExecutionTime = float("%0.2f"%(sum(executionTime) / NumOfRuns))
+	                		avgConvergence = numpy.around(numpy.mean(convergence, axis=0, dtype=numpy.float64), decimals=2).tolist()
+	                		a=numpy.concatenate([[dataset_List[h], optimizerName,objfname,avgExecutionTime,avgSSE,avgPurity,avgEntropy,avgHomo, avgComp, avgVmeas, avgAMI, avgARI, avgFmeasure, avgTWCV, avgSC, avgAccuracy, avgDI, avgDB, avgStdev],avgConvergence])
+	                		writer.writerow(a)
+	                	out.close()
 	                Flag=True # at least one experiment
-	                    
+
+	if Export_convergence == True:
+		conv_plot.run(results_directory, optimizer, objectivefunc, dataset_List, Iterations)
+    
+	
+	if Export_boxplot == True:
+		box_plot.run(results_directory, optimizer, objectivefunc, dataset_List, Iterations)
+
 	if (Flag==False): # Faild to run at least one experiment
 	    print("No Optomizer or Cost function is selected. Check lists of available optimizers and cost functions") 
