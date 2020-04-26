@@ -4,43 +4,19 @@ Created on Sat Mar  9 18:50:48 2019
 
 @author: Raneem
 """
-
-from sklearn import preprocessing
-
 from optimizer_run import run
 
 # Select optimizers
-CSSA= False
-CPSO= True
-CGA= True
-CBAT= False
-CFFA=False
-CGWO=False
-CWOA=False
-CMVO=False
-CMFO=False
-CCS=False
-optimizer=[CSSA, CPSO, CGA, CBAT, CFFA, CGWO, CWOA, CMVO, CMFO, CCS]
+# SSA,PSO,GA,BAT,FFA,GWO,WOA,MVO,MFO,CS
+optimizer=["PSO", "GA"]
 
 # Select objective function
-SSE=True
-TWCV=False
-SC=False
-DB=False
-DI=False
-objectivefunc=[SSE, TWCV, SC, DB, DI] 
+# SSE,TWCV,SC,DB,DI
+objectivefunc=["SSE", "TWCV"] 
 
 # Select data sets
-dataset_List = ["iris.csv","flame.csv"]
-'''
-dataset_List = ["aggregation.csv","aniso.csv","appendicitisNorm.csv", "balance.csv",
-                "banknote.csv", "blobs.csv","Blood.csv","circles.csv","diagnosis_II.csv",
-                "ecoli.csv","flame.csv","glass.csv","heart.csv","ionosphere.csv",
-                "iris.csv","iris2D.csv","jain.csv","liver.csv","moons.csv",
-                "mouse.csv","pathbased.csv","seeds.csv","smiley.csv","sonar.csv",
-                "varied.csv","vary-density.csv","vertebral2.csv","vertebral3.csv",
-                "wdbc.csv","wine.csv"]
-'''
+#aggregation,aniso,appendicitis,balance,banknote,blobs,Blood,circles,diagnosis_II,ecoli,flame,glass,heart,ionosphere,iris,iris2D,jain,liver,moons,mouse,pathbased,seeds,smiley,sonar,varied,vary-density,vertebral2,vertebral3,wdbc,wine
+dataset_List = ["iris","flame"]
 
 # Select number of repetitions for each experiment. 
 # To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
