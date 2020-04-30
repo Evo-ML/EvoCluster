@@ -3,7 +3,7 @@ import pandas as pd
 import objectives
 
 def run(results_directory, optimizer, objectivefunc, dataset_List, Iterations):
-
+    plt.ioff()
     fileResultsData = pd.read_csv(results_directory + '/experiment.csv')
 
     for d in range(len(dataset_List)):
