@@ -79,8 +79,8 @@ Select general parameters for all optimizers (population size, number of iterati
         params = {'PopulationSize' : 30, 'Iterations' : 50}
 
 Choose whether to Export the results in different formats
-        export_flags = {'Export_avg':True, 'Export_details':True, 'Export_details_labels':True, 
-'Export_convergence':True, 'Export_boxplot':True}
+
+        export_flags = {'Export_avg':True, 'Export_details':True, 'Export_details_labels':True, 'Export_convergence':True, 'Export_boxplot':True}
 
 run the framework
 
