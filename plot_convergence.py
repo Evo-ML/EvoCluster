@@ -13,7 +13,7 @@ def run(results_directory, optimizer, objectivefunc, dataset_List, Iterations):
 
             startIteration = 0                
             if 'SSA' in optimizer:
-                startIteration = 2             
+                startIteration = 1             
             allGenerations = [x+1 for x in range(startIteration,Iterations)]   
             for i in range(len(optimizer)):
                 optimizer_name = optimizer[i]

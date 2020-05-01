@@ -8,7 +8,7 @@ from optimizer_run import run
 
 # Select optimizers
 # "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
-optimizer=["PSO"]
+optimizer=["SSA"]
 
 # Select objective function
 # "SSE","TWCV","SC","DB","DI"

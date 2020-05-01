@@ -130,7 +130,7 @@ def SSA(objf,lb,ub,dim,N,Max_iteration, k, points):
     s.endTime=time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime=timerEnd-timerStart
     s.convergence=Convergence_curve
-    s.optimizer="CSSA"   
+    s.optimizer="SSA"   
     s.objfname=objf.__name__
     s.labelsPred = numpy.array(FoodLabelsPred, dtype=numpy.int64)
     s.bestIndividual = FoodPosition
