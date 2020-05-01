@@ -23,8 +23,7 @@ Run
 
 (possibly with `sudo`)
 
-That command above will install  `sklearn`, `NumPy` and `SciPy` for
-you.
+That command above will install  `NumPy`, `SciPy`, `sklearn`, `pandas`, and `matplotlib` for you.
 
 - If you are installing EvoCluster onto Windows, please Install Anaconda from here https://www.continuum.io/downloads, which is the leading open data science platform powered by Python.
 - If you are installing onto Ubuntu or Debian and using Python 3 then
