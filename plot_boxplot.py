@@ -1,7 +1,5 @@
 import numpy as np
 import pandas as pd 
-import plotly.graph_objs as go
-import plotly.io as pio
 import objectives
 import matplotlib.pyplot as plt
 
