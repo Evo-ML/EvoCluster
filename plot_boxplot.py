@@ -36,7 +36,7 @@ def run(results_directory, optimizer, objectivefunc, dataset_List, ev_measures, 
                  
                 plt.legend(handles= box['boxes'], labels=optimizer, 
                     loc="top right", bbox_to_anchor=(1.2,1.02))
-                fig_name = results_directory + "/boxplot-" + dataset_List[d] + "-" + objective_name + "-" + ev_measures[z] + ".pdf"
+                fig_name = results_directory + "/boxplot-" + dataset_List[d] + "-" + objective_name + "-" + ev_measures[z] + ".png"
                 plt.savefig(fig_name, bbox_inches='tight')
                 plt.clf()
                 #plt.show()
