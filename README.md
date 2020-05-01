@@ -37,7 +37,6 @@ Clone the Git repository from GitHub
 
     git clone https://github.com/RaneemQaddoura/EvoCluster.git
 
-
 ## Quick User Guide
 EvoCluster Framework contains more than thirty datasets (Obtainied from UCI repository, scikit learn, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris). 
 The main file is the main.py, which considered the interface of the framewok. In the main.py you 
@@ -47,45 +46,48 @@ To choose PSO optimizer for your experiment, change the PSO flag to true and oth
 
 ## Select framework parameters
 
-Select optimizers
-"SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
+Select optimizers from the list of available ones: "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
 
-optimizer=["SSA","PSO","GA"]
+        optimizer=["SSA","PSO","GA"]
 
-Select objective function
-"SSE","TWCV","SC","DB","DI"
-objectivefunc=["SSE","TWCV"] 
+Select objective function from the list of available ones:"SSE","TWCV","SC","DB","DI"
 
-Select data sets
-dataset_List = ["iris","aggregation"]
+        objectivefunc=["SSE","TWCV"] 
 
-The folder datasets in the repositoriy contains 3 binary datasets (All of them are obtained from UCI repository).
+Select data sets from the list of available ones
+The folder datasets in the repositoriy contains 30 datasets (All of them are obtained from Scikit learn, UCI, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris Blog).
 
 To add new dataset:
 - Put your dataset in a csv format (No header is required)
-- Normalize/Scale you dataset ([0,1] scaling is prefered) #(Optional)
 - Place the new datset files in the datasets folder.
-- Add the dataset to the datasets list in the main.py (Line 18).
+- Add the dataset to the datasets list in the optimizer.py (Line 19).
   
   For example, if the dastaset name is seed, the new line  will be like this:
         
-        datasets=["aggregation.csv", "seeds.csv"]
+        datasets=["aggregation", "seeds"]
 
 Select number of repetitions for each experiment. 
 To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
 NumOfRuns=3
 
 Select general parameters for all optimizers (population size, number of iterations) ....
-params = {'PopulationSize' : 20, 'Iterations' : 20}
+
+        params = {'PopulationSize' : 20, 'Iterations' : 20}
 
 run the framework
-run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
+
+        run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 
 Now your experiment is ready to go. Enjoy!  
 
-The results will be automaticly generated in excel file called Experiment which is concatnated with the date and time of the experiment.
-The results file contains the following measures:
+The results will be automaticly generated ina folder which is concatnated with the date and time of the experiment. this folder consists of 3 csv file and 2 plots:
+- experiment.csv
+- experiment_details.csv
+- experiment_details_Labels.csv
+- Convergence plot
+- Box plot
 
+The experiment and the experiment_details files contain the following measures:
 
     Optimizer: The name of the used optimizer
     Dataset: The name of the dataset.
@@ -123,6 +125,8 @@ Use the [issue tracker](https://github.com/RaneemQaddoura/EvoCluster/issues).
 ## Citation Request:
 
 Please include these citations if you plan to use this Framework:
+
+- Qaddoura, Raneem, et al. "EvoCluster: An Open-Source Nature-Inspired Optimization Clustering Framework in Python." International Conference on the Applications of Evolutionary Computation (Part of EvoStar). Springer, Cham, 2020.
 
 - Ruba Abu Khurma, Ibrahim Aljarah, Ahmad Sharieh, and Seyedali Mirjalili. Evolopy-fs: An
 open-source nature-inspired optimization framework in python for feature selection. In Evolutionary
