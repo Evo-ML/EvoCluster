@@ -21,11 +21,12 @@ def run(results_directory, optimizer, objectivefunc, dataset_List, Iterations):
                 row = fileResultsData[(fileResultsData["Dataset"] == dataset_List[d]) & (fileResultsData["Optimizer"] == optimizer_name) & (fileResultsData["objfname"] == objective_name)]
                 row = row.iloc[:, 19+startIteration:]
 
-                plt.plot(allGenerations, row.values.tolist()[0], label="C" + optimizer_name)
+                plt.plot(allGenerations, row.values.tolist()[0], label=optimizer_name)
             plt.xlabel('Iterations')
             plt.ylabel('Fitness')
-            plt.legend(loc='right')
+            plt.legend(loc="top right", bbox_to_anchor=(1.2,1.02))
             plt.grid()
-            plt.savefig(results_directory + "/convergence-" + dataset_List[d] + "-" + objective_name + ".pdf")
+            fig_name = results_directory + "/convergence-" + dataset_List[d] + "-" + objective_name + ".pdf"
+            plt.savefig(fig_name, bbox_inches='tight')
             plt.clf()
             #plt.show()

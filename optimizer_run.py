@@ -25,8 +25,8 @@ import numpy
 import warnings
 import time
 import csv
-import plot_convergence_run as conv_plot
-import plot_boxplot_run as box_plot
+import plot_convergence as conv_plot
+import plot_boxplot as box_plot
 
 warnings.simplefilter(action='ignore')
 
@@ -192,6 +192,8 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
                 for z in range (0,NumOfRuns):
                     print("Dataset: " + dataset_List[h])
                     print("Run no.: " + str(z)) 
+                    print("Population Size: " + str(PopulationSize)) 
+                    print("Iterations: " + str(Iterations)) 
                     
                     objective_name=objectivefunc[j]
                     x=selector(optimizer[i],objective_name, k[h], f[h], PopulationSize,Iterations, points[h])
@@ -288,7 +290,8 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
     
 	
 	if Export_boxplot == True:
-		box_plot.run(results_directory, optimizer, objectivefunc, dataset_List, Iterations)
+		ev_measures=['SSE','Purity','Entropy', 'HS', 'CS', 'VM', 'AMI', 'ARI', 'Fmeasure', 'TWCV', 'SC', 'Accuracy', 'DI', 'DB', 'STDev']
+		box_plot.run(results_directory, optimizer, objectivefunc, dataset_List, ev_measures, Iterations)
 
 	if (Flag==False): # Faild to run at least one experiment
 	    print("No Optomizer or Cost function is selected. Check lists of available optimizers and cost functions") 
