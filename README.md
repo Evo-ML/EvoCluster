@@ -45,15 +45,18 @@ can setup your experiment by selecting the optmizers, the datasets, number of ru
 and population size. The following is a sample example to use the EvoCluster framework.
 To choose PSO optimizer for your experiment, change the PSO flag to true and others to false.
 
-# Select optimizers
-# "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
+## Select framework parameters
+
+Select optimizers
+"SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
+
 optimizer=["SSA","PSO","GA"]
 
-# Select objective function
-# "SSE","TWCV","SC","DB","DI"
+Select objective function
+"SSE","TWCV","SC","DB","DI"
 objectivefunc=["SSE","TWCV"] 
 
-# Select data sets
+Select data sets
 dataset_List = ["iris","aggregation"]
 
 The folder datasets in the repositoriy contains 3 binary datasets (All of them are obtained from UCI repository).
@@ -68,14 +71,14 @@ To add new dataset:
         
         datasets=["aggregation.csv", "seeds.csv"]
 
-# Select number of repetitions for each experiment. 
-# To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
+Select number of repetitions for each experiment. 
+To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
 NumOfRuns=3
 
-# Select general parameters for all optimizers (population size, number of iterations) ....
+Select general parameters for all optimizers (population size, number of iterations) ....
 params = {'PopulationSize' : 20, 'Iterations' : 20}
 
-#run the framework
+run the framework
 run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
 
 Now your experiment is ready to go. Enjoy!  
