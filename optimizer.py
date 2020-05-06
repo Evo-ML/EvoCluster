@@ -11,19 +11,19 @@ from optimizer_run import run
 optimizer=["SSA","PSO","GA","GWO"]
 
 # Select objective function
-#"aggregation","aniso","appendicitis","balance","banknote","blobs","Blood","circles","diagnosis_II","ecoli","flame","glass","heart","ionosphere","iris","iris2D","jain","liver","moons","mouse","pathbased","seeds","smiley","sonar","varied","vary-density","vertebral2","vertebral3","wdbc","wine"
-dataset_List = ["iris","aggregation"]
+# "SSE","TWCV","SC","DB","DI"
+objectivefunc=["SSE","TWCV"] 
 
 # Select data sets
-# Select general parameters for all optimizers (population size, number of iterations) ....
-params = {'PopulationSize' : 30, 'Iterations' : 50}
+#"aggregation","aniso","appendicitis","balance","banknote","blobs","Blood","circles","diagnosis_II","ecoli","flame","glass","heart","ionosphere","iris","iris2D","jain","liver","moons","mouse","pathbased","seeds","smiley","sonar","varied","vary-density","vertebral2","vertebral3","wdbc","wine"
+dataset_List = ["iris","aggregation"]
 
 # Select number of repetitions for each experiment. 
 # To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
 NumOfRuns=3
 
 # Select general parameters for all optimizers (population size, number of iterations) ....
-params = {'PopulationSize' : 20, 'Iterations' : 20}
+params = {'PopulationSize' : 30, 'Iterations' : 50}
 
 #Choose whether to Export the results in different formats
 export_flags = {'Export_avg':True, 'Export_details':True, 'Export_details_labels':True, 
