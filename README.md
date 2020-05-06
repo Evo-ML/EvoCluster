@@ -4,14 +4,18 @@
 
 EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation  of  the  framework  includes  ten  metaheristic  optimizers,  thirtydatasets,  five  objective  functions,  and  twelve  evaluation  measures.  The  source code of EvoCluster is publicly available at (http://evo-ml.com/2019/10/25/evocluster/).
 
-The full list of implemented optimizers is available here https://github.com/7ossam81/EvoloPy/wiki/List-of-optimizers
-
-
 ## Features
-- Ten nature-inspired metaheuristic optimizers are implemented.
+- Ten nature-inspired metaheuristic optimizers are implemented (SSA, PSO, GA, BAT, FFA, GWO, WOA, MVO, MFO, and CS).
+- Five objective functions (SSE, TWCV, SC, DB, and DI)
+- Thirty datasets obtained from Scikit learn, UCI, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris Blog
+- Twelve evaluation measures (SSE, Purity,	Entropy,	HS,	CS,	VM,	AMI,	ARI,	Fmeasure,	TWCV,	SC,	Accuracy,	DI,	DB,	and Standard Diviation)
+)
 - The implimentation uses the fast array manipulation using [`NumPy`] (http://www.numpy.org/).
 - Matrix support using [`SciPy`'s] (https://www.scipy.org/) package.
-- More optimizers are comming soon.
+- Simple and efficient tools for prediction using [`sklearn`] (https://scikit-learn.org/stable/)
+- File data analysis and manipulation tool using [`pandas`] (https://pandas.pydata.org/)
+- Plot interactive visualizations using [`matplotlib`] (https://matplotlib.org/)
+- More optimizers, objective functions, adatasets, and evaluation measures are comming soon.
  
 
 ## Installation
@@ -39,18 +43,16 @@ Clone the Git repository from GitHub
 
 ## Quick User Guide
 EvoCluster Framework contains more than thirty datasets (Obtainied from UCI repository, scikit learn, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris). 
-The main file is the main.py, which considered the interface of the framewok. In the main.py you 
-can setup your experiment by selecting the optmizers, the datasets, number of runs, number of iterations, number of neurons
-and population size. The following is a sample example to use the EvoCluster framework.
-To choose PSO optimizer for your experiment, change the PSO flag to true and others to false.
+The main file is the main.py, which considered the interface of the framewok. In the optimizer.py you 
+can setup your experiment by selecting the optmizers, the datasets, objective functions, number of runs, number of iterations, and the population size. The following is a sample example to use the EvoCluster framework.
 
 ## Select framework parameters
 
-Select optimizers from the list of available ones: "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
+Select optimizers from the list of available ones: "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS". For example:
 
         optimizer=["SSA","PSO","GA"]
 
-Select objective function from the list of available ones:"SSE","TWCV","SC","DB","DI"
+Select objective function from the list of available ones:"SSE","TWCV","SC","DB","DI". For example:
 
         objectivefunc=["SSE","TWCV"] 
 
@@ -58,7 +60,7 @@ Select data sets from the list of available ones
 The folder datasets in the repositoriy contains 30 datasets (All of them are obtained from Scikit learn, UCI, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris Blog).
 
 To add new dataset:
-- Put your dataset in a csv format (No header is required)
+- Put your dataset in a csv format (No header is required, labels are at the last column)
 - Place the new datset files in the datasets folder.
 - Add the dataset to the datasets list in the optimizer.py (Line 19).
   
@@ -70,9 +72,15 @@ Select number of repetitions for each experiment.
 To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
 NumOfRuns=3
 
+        NumOfRuns=30
+
 Select general parameters for all optimizers (population size, number of iterations) ....
 
-        params = {'PopulationSize' : 20, 'Iterations' : 20}
+        params = {'PopulationSize' : 30, 'Iterations' : 50}
+
+Choose whether to Export the results in different formats
+
+        export_flags = {'Export_avg':True, 'Export_details':True, 'Export_details_labels':True, 'Export_convergence':True, 'Export_boxplot':True}
 
 run the framework
 
@@ -80,7 +88,7 @@ run the framework
 
 Now your experiment is ready to go. Enjoy!  
 
-The results will be automaticly generated ina folder which is concatnated with the date and time of the experiment. this folder consists of 3 csv file and 2 plots:
+The results will be automaticly generated ina folder which is concatnated with the date and time of the experiment. this folder consists of three csv files and two types of plots:
 - experiment.csv
 - experiment_details.csv
 - experiment_details_Labels.csv
@@ -117,6 +125,11 @@ The experiment and the experiment_details files contain the following measures:
 ## Contribute
 - Issue Tracker: https://github.com/RaneemQaddoura/EvoCluster/issues  
 - Source Code: https://github.com/RaneemQaddoura/EvoCluster
+
+## Related Links
+- Colab: https://github.com/RaneemQaddoura/EvoCluster/blob/master/evocluster.ipynb
+- Evo-ml: http://evo-ml.com/evocluster/
+- Introduction video: https://www.youtube.com/watch?v=3DYIdxILZaw
 
 ## Support
 
