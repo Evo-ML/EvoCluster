@@ -64,8 +64,8 @@ To add new dataset:
 - Place the new datset files in the datasets folder.
 - Add the dataset to the datasets list in the optimizer.py (Line 19).
   
-  For example, if the dastaset name is seed, the new line  will be like this:
-        
+For example, if the dastaset name is seed, the new line  will be like this:
+
         datasets=["aggregation", "seeds"]
 
 Select number of repetitions for each experiment. 
