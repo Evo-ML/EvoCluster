@@ -70,7 +70,6 @@ To add new dataset:
 
 Select number of repetitions for each experiment. 
 To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
-NumOfRuns=3
 
         NumOfRuns=30
 
