@@ -8,15 +8,15 @@ from optimizer import run
 
 # Select optimizers
 # "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
-optimizer=["SSA"]
+optimizer=["SSA","PSO","GA","GWO"]
 
 # Select objective function
 # "SSE","TWCV","SC","DB","DI"
-objectivefunc=["SSE"] 
+objectivefunc=["SSE","TWCV"] 
 
 # Select data sets
 #"aggregation","aniso","appendicitis","balance","banknote","blobs","Blood","circles","diagnosis_II","ecoli","flame","glass","heart","ionosphere","iris","iris2D","jain","liver","moons","mouse","pathbased","seeds","smiley","sonar","varied","vary-density","vertebral2","vertebral3","wdbc","wine"
-dataset_List = ["iris"]
+dataset_List = ["iris","aggregation"]
 
 # Select number of repetitions for each experiment. 
 # To obtain meaningful statistical results, usually 30 independent runs are executed for each algorithm.
