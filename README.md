@@ -126,10 +126,12 @@ The experiment and the experiment_details files contain the following measures:
 - Issue Tracker: https://github.com/RaneemQaddoura/EvoCluster/issues  
 - Source Code: https://github.com/RaneemQaddoura/EvoCluster
 
-## Related Links
+## Useful Links
 - Colab: https://github.com/RaneemQaddoura/EvoCluster/blob/master/evocluster.ipynb
 - Evo-ml: http://evo-ml.com/evocluster/
 - Introduction video: https://www.youtube.com/watch?v=3DYIdxILZaw
+- Demo video: https://www.youtube.com/watch?v=TOIo9WMBWUc
+
 
 ## Support
 
