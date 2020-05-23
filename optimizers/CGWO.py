@@ -24,14 +24,17 @@ def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter, k, points):
     #SearchAgents_no=5
     
     # initialize alpha, beta, and delta_pos
-    Alpha_pos=numpy.zeros(dim)
     Alpha_score=float("inf")
+    Alpha_pos=numpy.zeros(dim)
+    Alpha_labels=numpy.zeros(dim)
     
-    Beta_pos=numpy.zeros(dim)
     Beta_score=float("inf")
+    Beta_pos=numpy.zeros(dim)
+    Beta_labels=numpy.zeros(dim)
     
-    Delta_pos=numpy.zeros(dim)
     Delta_score=float("inf")
+    Delta_pos=numpy.zeros(dim)
+    Delta_labels=numpy.zeros(dim)
 
     #Initialize the positions of search agents
     Positions = numpy.zeros((SearchAgents_no, dim))
@@ -61,22 +64,29 @@ def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter, k, points):
             
             # Update Alpha, Beta, and Delta
             if fitness<Alpha_score :
+                Delta_score=Beta_score  # Update delte
+                Delta_pos=Beta_pos.copy()
+                Delta_labels=Beta_labels.copy()
+                Beta_score=Alpha_score  # Update beta
+                Beta_pos=Alpha_pos.copy()
+                Beta_labels=Alpha_labels.copy()
                 Alpha_score=fitness; # Update alpha
                 Alpha_pos=Positions[i,:].copy()
                 Alpha_labels=labelsPred[i,:].copy()
-            
-            
+                        
             if (fitness>Alpha_score and fitness<Beta_score ):
+                Delta_score=Beta_score  # Update delte
+                Delta_pos=Beta_pos.copy()
+                Delta_labels=Beta_labels.copy()
                 Beta_score=fitness  # Update beta
                 Beta_pos=Positions[i,:].copy()
+                Beta_labels=labelsPred[i,:].copy()            
             
-            
-            if (fitness>Alpha_score and fitness>Beta_score and fitness<Delta_score): 
+            if (fitness>Alpha_score and fitness>Beta_score and fitness<Delta_score):                 
                 Delta_score=fitness # Update delta
                 Delta_pos=Positions[i,:].copy()
-            
-        
-        
+                Delta_labels=labelsPred[i,:].copy()           
+                
         
         a=2-l*((2)/Max_iter); # a decreases linearly fron 2 to 0
         
@@ -134,5 +144,3 @@ def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter, k, points):
     
     
     return s
-    
-
