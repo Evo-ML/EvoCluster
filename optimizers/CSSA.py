@@ -14,7 +14,7 @@ def SSA(objf,lb,ub,dim,N,Max_iteration, k, points):
     #lb=-100
     #ub=100
     #dim=30
-    N=50 # Number of search agents
+    #N=50 # Number of search agents
     
     Convergence_curve=numpy.zeros(Max_iteration)
 
