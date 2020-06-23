@@ -127,7 +127,7 @@ The experiment and the experiment_details files contain the following measures:
 - Source Code: https://github.com/RaneemQaddoura/EvoCluster
 
 ## Useful Links
-- Colab: https://github.com/RaneemQaddoura/EvoCluster/blob/master/evocluster.ipynb
+- Colab: https://github.com/RaneemQaddoura/EvoCluster/blob/master/EvoCluster.ipynb
 - Evo-ml: http://evo-ml.com/evocluster/
 - Introduction video: https://www.youtube.com/watch?v=3DYIdxILZaw
 - Demo video: https://www.youtube.com/watch?v=TOIo9WMBWUc
