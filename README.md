@@ -6,7 +6,7 @@ EvoCluster is an open source and cross-platform framework implemented in Python 
 
 ## Features
 - Ten nature-inspired metaheuristic optimizers are implemented (SSA, PSO, GA, BAT, FFA, GWO, WOA, MVO, MFO, and CS).
-- Five objective functions (SSE, TWCV, SC, DB, and DI)
+- Five objective functions (SSE, TWCV, SC, DB, and DI).
 - Thirty datasets obtained from Scikit learn, UCI, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris Blog
 - Twelve evaluation measures (SSE, Purity,	Entropy,	HS,	CS,	VM,	AMI,	ARI,	Fmeasure,	TWCV,	SC,	Accuracy,	DI,	DB,	and Standard Diviation)
 )
