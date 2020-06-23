@@ -119,7 +119,7 @@ The experiment and the experiment_details files contain the following measures:
     DI
     DB
     STDev
-    Iter1	Iter2 Iter3... : Convergence values (The bjective function values after every iteration).	
+    Iter1	Iter2 Iter3 Iter4... : Convergence values (The bjective function values after every iteration).	
 
 
 ## Contribute
