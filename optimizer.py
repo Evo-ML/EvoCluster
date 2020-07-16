@@ -31,57 +31,6 @@ import plot_boxplot as box_plot
 import cluster_detection as clus_det
 
 warnings.simplefilter(action='ignore')
-
-def selector(algo,objective_name, k, f, popSize,Iter, points, metric):
-	"""
-	This is used to call the algorithm which is selected
-
-	Parameters
-	----------
-	algo : int
-	     The index of the selected algorithm
-	objective_name : str
-	     The name of the selected function
-	k : int
-	     Number of clusters
-	f : int
-	     Number of features
-	popSize : int
-	     Size of population (the number of individuals at each iteration)
-	Iter : int
-	     The number of iterations
-	points : numpy.ndaarray
-	     The attribute values of all the points
-
-	Returns
-	-----------
-	obj
-	     x: solution object returned by the selected algorithm
-	"""
-	lb=0
-	ub=1
-
-	if(algo=="SSA"):
-		x=cssa.SSA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="PSO"):
-		x=cpso.PSO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="GA"):
-		x=cga.GA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="BAT"):
-		x=cbat.BAT(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="FFA"):
-		x=cffa.FFA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="GWO"):
-		x=cgwo.GWO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="WOA"):
-		x=cwoa.WOA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="MVO"):
-		x=cmvo.MVO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="MFO"):
-		x=cmfo.MFO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	if(algo=="CS"):
-		x=ccs.CS(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
-	return x
 		
 def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags, 
 	auto_cluster = True, n_clusters = 'supervised', labels_exist = True, metric='euclidean'):
@@ -132,9 +81,9 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
 		- experiments, and experiments_details files contain only the evaluation measures for 
 		  "SSE","TWCV","SC","DB","DI","STDev"
 		- Export_boxplot is set for "SSE","TWCV","SC","DB","DI","STDev"   
-    metric : string, default = 'euclidean'
-        The metric to use when calculating the distance between points if applicable for the objective function selected. 
-        It must be one of the options allowed by scipy.spatial.distance.pdist for its metric parameter
+	metric : string, default = 'euclidean'
+		The metric to use when calculating the distance between points if applicable for the objective function selected. 
+		It must be one of the options allowed by scipy.spatial.distance.pdist for its metric parameter
 
 	
 	Returns
@@ -378,3 +327,55 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
 		box_plot.run(results_directory, optimizer, objectivefunc, dataset_List, ev_measures, Iterations)
 
 	print("Execution completed") 
+
+
+def selector(algo,objective_name, k, f, popSize,Iter, points, metric):
+	"""
+	This is used to call the algorithm which is selected
+
+	Parameters
+	----------
+	algo : int
+	     The index of the selected algorithm
+	objective_name : str
+	     The name of the selected function
+	k : int
+	     Number of clusters
+	f : int
+	     Number of features
+	popSize : int
+	     Size of population (the number of individuals at each iteration)
+	Iter : int
+	     The number of iterations
+	points : numpy.ndaarray
+	     The attribute values of all the points
+
+	Returns
+	-----------
+	obj
+	     x: solution object returned by the selected algorithm
+	"""
+	lb=0
+	ub=1
+
+	if(algo=="SSA"):
+		x=cssa.SSA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="PSO"):
+		x=cpso.PSO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="GA"):
+		x=cga.GA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="BAT"):
+		x=cbat.BAT(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="FFA"):
+		x=cffa.FFA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="GWO"):
+		x=cgwo.GWO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="WOA"):
+		x=cwoa.WOA(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="MVO"):
+		x=cmvo.MVO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="MFO"):
+		x=cmfo.MFO(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	if(algo=="CS"):
+		x=ccs.CS(getattr(objectives, objective_name),lb,ub,k * f,popSize,Iter, k, points, metric)        
+	return x
