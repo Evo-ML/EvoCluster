@@ -6,7 +6,7 @@ Created on Sat Mar  9 18:12:29 2019
 """
 
 from sklearn import cluster, metrics
-from sklearn.metrics.pairwise import euclidean_distances
+from scipy.spatial.distance import pdist, cdist
 import numpy
 import sys
 
@@ -20,7 +20,7 @@ def getLabelsPred(startpts, points, k):
     return labelsPred
     
 
-def SSE(startpts, points, k):
+def SSE(startpts, points, k, metric):
     labelsPred = getLabelsPred(startpts, points, k)
     fitness = 0
         
@@ -28,8 +28,12 @@ def SSE(startpts, points, k):
         fitness = sys.float_info.max
     else:
         centroidsForPoints = startpts[labelsPred]
-        fitness = numpy.linalg.norm(points-centroidsForPoints, axis = 1)**2
-        fitness = sum(fitness)
+        fitness = 0
+        for i in range(k):
+            indexes = [n for n,x in enumerate(labelsPred) if x==i]
+            fit = cdist(points[indexes], centroidsForPoints[indexes], metric)**2
+            fit = sum(fit)[0]
+            fitness += fit
     return fitness, labelsPred
 
 
@@ -54,13 +58,13 @@ def TWCV(startpts, points, k):
     return fitness, labelsPred
 
 
-def SC(startpts, points, k):    
+def SC(startpts, points, k, metric):    
     labelsPred = getLabelsPred(startpts, points, k)
     
     if numpy.unique(labelsPred).size < k:
         fitness = sys.float_info.max
     else:
-        silhouette = metrics.silhouette_score(points, labelsPred, metric='euclidean')
+        silhouette = metrics.silhouette_score(points, labelsPred, metric=metric)
         #silhouette = (silhouette - (-1)) / (1 - (-1))
         silhouette = (silhouette + 1) / 2
         fitness = 1 - silhouette
@@ -98,8 +102,12 @@ def big_delta_fast(ci, distances):
             
     return numpy.max(values)
 
-def dunn_fast(points, labels):
-    distances = euclidean_distances(points)
+def dunn_fast(points, labels, metric):
+    v = pdist(points, metric)
+    size_X  = len(points)
+    X = numpy.zeros((size_X,size_X))
+    X[numpy.triu_indices(X.shape[0], k = 1)] = v
+    distances = X + X.T
     ks = numpy.sort(numpy.unique(labels))
     
     deltas = numpy.ones([len(ks), len(ks)])*1000000
@@ -117,13 +125,13 @@ def dunn_fast(points, labels):
     return di
     
 
-def DI(startpts, points, k):
+def DI(startpts, points, k, metric):
     labelsPred = getLabelsPred(startpts, points, k)
     
     if numpy.unique(labelsPred).size < k:
         fitness = sys.float_info.max
     else:
-        dunn = dunn_fast(points, labelsPred)
+        dunn = dunn_fast(points, labelsPred, metric)
         if(dunn < 0):
             dunn = 0
         fitness = 1 - dunn

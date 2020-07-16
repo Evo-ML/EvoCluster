@@ -35,7 +35,7 @@ def get_cuckoos(nest,best,lb,ub,n,dim):
 
     return tempnest
 
-def get_best_nest(nest,labelsPred, newnest,fitness,n,dim,objf, k, points):
+def get_best_nest(nest,labelsPred, newnest,fitness,n,dim,objf, k, points, metric):
 # Evaluating all new solutions
     tempnest=numpy.zeros((n,dim))
     tempnest=numpy.copy(nest)
@@ -44,7 +44,10 @@ def get_best_nest(nest,labelsPred, newnest,fitness,n,dim,objf, k, points):
     for j in range(0,n):
     #for j=1:size(nest,1),
         startpts = numpy.reshape(newnest[j,:], (k,(int)(dim/k)))
-        fitnessValue, labelsPredValues=objf(startpts, points, k) 
+        if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+            fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+        else:
+            fitnessValue, labelsPredValues=objf(startpts, points, k) 
         fnew= fitnessValue
         newLabels = labelsPredValues
         
@@ -80,7 +83,7 @@ def empty_nests(nest,pa,n,dim):
 ##########################################################################
 
 
-def CS(objf,lb,ub,dim,n,N_IterTotal,k,points):
+def CS(objf,lb,ub,dim,n,N_IterTotal,k,points, metric):
 
     #lb=-1
     #ub=1
@@ -118,7 +121,7 @@ def CS(objf,lb,ub,dim,n,N_IterTotal,k,points):
     timerStart=time.time() 
     s.startTime=time.strftime("%Y-%m-%d-%H-%M-%S")
     
-    fmin,bestnest,bestlabels,nest,fitness,labelsPred =get_best_nest(nest,labelsPred,new_nest,fitness,n,dim,objf,k,points)
+    fmin,bestnest,bestlabels,nest,fitness,labelsPred =get_best_nest(nest,labelsPred,new_nest,fitness,n,dim,objf,k,points, metric)
     convergence = [];
     # Main loop counter
     for iter in range (0,N_IterTotal):
@@ -128,14 +131,14 @@ def CS(objf,lb,ub,dim,n,N_IterTotal,k,points):
          
          
          # Evaluate new solutions and find best
-         fnew,best,bestlabels,nest,fitness,labelsPred=get_best_nest(nest,labelsPred,new_nest,fitness,n,dim,objf,k,points)
+         fnew,best,bestlabels,nest,fitness,labelsPred=get_best_nest(nest,labelsPred,new_nest,fitness,n,dim,objf,k,points, metric)
          
         
          new_nest=empty_nests(new_nest,pa,n,dim) ;
          
         
         # Evaluate new solutions and find best
-         fnew,best,bestlabels,nest,fitness,labelsPred=get_best_nest(nest,labelsPred,new_nest,fitness,n,dim,objf,k,points)
+         fnew,best,bestlabels,nest,fitness,labelsPred=get_best_nest(nest,labelsPred,new_nest,fitness,n,dim,objf,k,points, metric)
     
          if fnew<fmin:
             fmin=fnew

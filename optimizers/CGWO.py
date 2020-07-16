@@ -14,7 +14,7 @@ import time
 
     
 
-def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter, k, points):
+def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter, k, points, metric):
     
     
     #Max_iter=1000
@@ -58,7 +58,10 @@ def GWO(objf,lb,ub,dim,SearchAgents_no,Max_iter, k, points):
 
             # Calculate objective function for each search agent
             startpts = numpy.reshape(Positions[i,:], (k,(int)(dim/k)))
-            fitnessValue, labelsPredValues=objf(startpts, points, k) 
+            if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+                fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+            else:
+                fitnessValue, labelsPredValues=objf(startpts, points, k) 
             fitness = fitnessValue
             labelsPred[i,:] = labelsPredValues
             

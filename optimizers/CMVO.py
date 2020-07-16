@@ -55,7 +55,7 @@ def RouletteWheelSelection(weights):
 
 
 
-def MVO(objf,lb,ub,dim,N,Max_time, k, points):
+def MVO(objf,lb,ub,dim,N,Max_time, k, points, metric):
 
     "parameters"
     #dim=30
@@ -109,7 +109,10 @@ def MVO(objf,lb,ub,dim,N,Max_time, k, points):
             
     
             startpts = numpy.reshape(Universes[i,:], (k,(int)(dim/k)))
-            fitnessValue, labelsPredValues=objf(startpts, points, k) 
+            if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+                fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+            else:
+                fitnessValue, labelsPredValues=objf(startpts, points, k) 
             Inflation_rates[i] = fitnessValue
             labelsPred[i,:] = labelsPredValues
            

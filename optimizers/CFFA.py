@@ -35,7 +35,7 @@ def alpha_new(alpha,NGen):
 
 
 
-def FFA(objf,lb,ub,dim,n,MaxGeneration, k, points):
+def FFA(objf,lb,ub,dim,n,MaxGeneration, k, points, metric):
 
     #General parameters
 
@@ -83,7 +83,10 @@ def FFA(objf,lb,ub,dim,n,MaxGeneration, k, points):
         #% Evaluate new solutions (for all n fireflies)
         for i in range(0,n):            
             startpts = numpy.reshape(ns[i,:], (k,(int)(dim/k)))
-            fitnessValue, labelsPredValues=objf(startpts, points, k) 
+            if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+                fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+            else:
+                fitnessValue, labelsPredValues=objf(startpts, points, k) 
             zn[i] = fitnessValue
             Lightn[i]=zn[i]
             labelsPred[i,:] = labelsPredValues

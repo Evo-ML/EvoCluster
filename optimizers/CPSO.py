@@ -11,8 +11,8 @@ import math
 from solution import solution
 import time
 
-def PSO(objf,lb,ub,dim,PopSize,iters, k, points):
-
+def PSO(objf,lb,ub,dim,PopSize,iters, k, points, metric):
+    
     # PSO parameters
     
 #    dim=30
@@ -62,7 +62,10 @@ def PSO(objf,lb,ub,dim,PopSize,iters, k, points):
             #Calculate objective function for each particle
             
             startpts = numpy.reshape(pos[i,:], (k,(int)(dim/k)))
-            fitness, labelsPred=objf(startpts, points, k) 
+            if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+                fitness, labelsPred=objf(startpts, points, k, metric) 
+            else:
+                fitness, labelsPred=objf(startpts, points, k) 
     
             if(pBestScore[i]>fitness):
                 pBestScore[i]=fitness

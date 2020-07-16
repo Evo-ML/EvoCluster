@@ -8,7 +8,7 @@ import time
 import sys
 
   
-def SSA(objf,lb,ub,dim,N,Max_iteration, k, points):
+def SSA(objf,lb,ub,dim,N,Max_iteration, k, points, metric):
 
     #Max_iteration=1000
     #lb=-100
@@ -39,7 +39,11 @@ def SSA(objf,lb,ub,dim,N,Max_iteration, k, points):
     for i in range(0,N):
        # evaluate moths
         startpts = numpy.reshape(SalpPositions[i,:], (k,(int)(dim/k)))
-        fitness, labelsPred=objf(startpts, points, k) 
+
+        if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+            fitness, labelsPred=objf(startpts, points, k, metric) 
+        else:
+            fitness, labelsPred=objf(startpts, points, k) 
         SalpFitness[i] = fitness
         SalpLabelsPred[i,:] = labelsPred
         
@@ -103,7 +107,12 @@ def SSA(objf,lb,ub,dim,N,Max_iteration, k, points):
             SalpPositions[i,:]=numpy.clip(SalpPositions[i,:], lb, ub)            
             
             startpts = numpy.reshape(SalpPositions[i,:], (k,(int)(dim/k)))
-            fitness, labelsPred=objf(startpts, points, k) 
+        
+            if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+                fitness, labelsPred=objf(startpts, points, k, metric) 
+            else:
+                fitness, labelsPred=objf(startpts, points, k) 
+                
             SalpFitness[i] = fitness
             SalpLabelsPred[i,:] = numpy.copy(labelsPred)
         

@@ -17,9 +17,9 @@ def run(results_directory, optimizer, objectivefunc, dataset_List, Iterations):
             allGenerations = [x+1 for x in range(startIteration,Iterations)]   
             for i in range(len(optimizer)):
                 optimizer_name = optimizer[i]
-
+                fileResultsData = fileResultsData.drop(['SSE','Purity','Entropy','HS','CS','VM','AMI','ARI','Fmeasure','TWCV','SC','Accuracy','DI','DB','STDev'], errors='ignore', axis=1)
                 row = fileResultsData[(fileResultsData["Dataset"] == dataset_List[d]) & (fileResultsData["Optimizer"] == optimizer_name) & (fileResultsData["objfname"] == objective_name)]
-                row = row.iloc[:, 19+startIteration:]
+                row = row.iloc[:, 5+startIteration:]
 
                 plt.plot(allGenerations, row.values.tolist()[0], label=optimizer_name)
             plt.xlabel('Iterations')

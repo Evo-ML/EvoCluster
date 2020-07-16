@@ -11,7 +11,7 @@ import time
 from solution import solution
     
 
-def BAT(objf,lb,ub,dim,N,Max_iteration, k, points):
+def BAT(objf,lb,ub,dim,N,Max_iteration, k, points, metric):
     
     n=N;      # Population size
     #lb=-50
@@ -53,7 +53,10 @@ def BAT(objf,lb,ub,dim,N,Max_iteration, k, points):
     #Evaluate initial random solutions
     for i in range(0,n):
         startpts = numpy.reshape(Sol[i,:], (k,(int)(dim/k)))
-        fitnessValue, labelsPredValues=objf(startpts, points, k) 
+        if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+            fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+        else:
+            fitnessValue, labelsPredValues=objf(startpts, points, k) 
         Fitness[i] = fitnessValue
         labelsPred[i,:] = labelsPredValues
     
@@ -84,7 +87,12 @@ def BAT(objf,lb,ub,dim,N,Max_iteration, k, points):
     
           # Evaluate new solutions
           startpts = numpy.reshape(S[i,:], (k,(int)(dim/k)))
-          fitnessValue, labelsPredValues=objf(startpts, points, k) 
+
+          if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+              fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+          else:
+              fitnessValue, labelsPredValues=objf(startpts, points, k) 
+              
           Fnew = fitnessValue
           LabelsPrednew = labelsPredValues
           

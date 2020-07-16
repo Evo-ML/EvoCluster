@@ -14,7 +14,7 @@ import time
 
 
   
-def MFO(objf,lb,ub,dim,N,Max_iteration,k,points):
+def MFO(objf,lb,ub,dim,N,Max_iteration,k,points, metric):
 
 
     #Max_iteration=1000
@@ -77,7 +77,10 @@ def MFO(objf,lb,ub,dim,N,Max_iteration,k,points):
 
             # evaluate moths
             startpts = numpy.reshape(Moth_pos[i,:], (k,(int)(dim/k)))
-            fitnessValue, labelsPredValues=objf(startpts, points, k) 
+            if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+                fitnessValue, labelsPredValues=objf(startpts, points, k, metric) 
+            else:
+                fitnessValue, labelsPredValues=objf(startpts, points, k) 
             Moth_fitness[i] = fitnessValue
             Moth_labels[i,:] = labelsPredValues
            

@@ -276,7 +276,7 @@ def clearDups(Population, lb, ub):
             		        
     return newPopulation
 
-def calculateCost(objf, population, dim, popSize, lb, ub, k, points):
+def calculateCost(objf, population, dim, popSize, lb, ub, k, points, metric):
         
     """    
     It calculates the fitness value of each individual in the population
@@ -312,7 +312,11 @@ def calculateCost(objf, population, dim, popSize, lb, ub, k, points):
         #scores[i] = objf(population[i,:]) 
         
         startpts = numpy.reshape(population[i,:], (k,(int)(dim/k)))
-        fitness, labelsPred=objf(startpts, points, k)
+
+        if objf.__name__ == 'SSE' or objf.__name__ == 'SC' or objf.__name__ == 'DI':
+            fitness, labelsPred=objf(startpts, points, k, metric) 
+        else:
+            fitness, labelsPred=objf(startpts, points, k) 
         
         scores[i] = fitness
         if fitness < bestScore:
@@ -348,7 +352,7 @@ def sortPopulation(population, scores):
     return population, scores
 
 
-def GA(objf,lb,ub,dim,popSize,iters, k, points):
+def GA(objf,lb,ub,dim,popSize,iters, k, points, metric):
         
     """    
     This is the main method which implements GA
@@ -408,7 +412,7 @@ def GA(objf,lb,ub,dim,popSize,iters, k, points):
            
         ga = clearDups(ga, lb, ub)
         
-        scores, bestLabelsPred, bestIndividual = calculateCost(objf, ga, dim, popSize, lb, ub, k, points)
+        scores, bestLabelsPred, bestIndividual = calculateCost(objf, ga, dim, popSize, lb, ub, k, points, metric)
             
         bestScore = min(scores)
          
