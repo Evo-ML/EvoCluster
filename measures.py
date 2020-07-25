@@ -157,8 +157,9 @@ def TWCV(individual, labelsPred, k, points):
         pointsInCluster = points[numpy.array(indices)]
         sumPairPointsCluster = sum(pointsInCluster)
         sumPairPointsCluster = numpy.power(sumPairPointsCluster,2)
-        sumPairPointsCluster = sum(sumPairPointsCluster)
-        sumPairPointsCluster = sumPairPointsCluster/len(pointsInCluster)
+        if len(pointsInCluster) != 0:
+            sumPairPointsCluster = sum(sumPairPointsCluster)
+            sumPairPointsCluster = sumPairPointsCluster/len(pointsInCluster)
         
         sumAllPairPointsCluster += sumPairPointsCluster
     fitness = (sumAllFeatures - sumAllPairPointsCluster)

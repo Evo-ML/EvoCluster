@@ -4,15 +4,18 @@ ref: https://medium.com/@masarudheena/4-best-ways-to-find-optimal-number-of-clus
 ref: https://github.com/minddrummer/gap/edit/master/gap/gap.py
 ref: https://www.tandfonline.com/doi/pdf/10.1080/03610927408827101
 ref: https://www.sciencedirect.com/science/article/pii/S0952197618300629?casa_token=W6QEUM7YA2cAAAAA:jtbAvDYF8axr8ghhr92aCnhXJ71wtCJ1tEZFHAjBUBbLrbJ8wdLHG0d4HIhDN5ICZJmrEGQ71vQ
+ref: https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Clustering-Dimensionality-Reduction/Clustering_metrics.ipynb
 '''
 
 from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
 from math import sqrt
 from sklearn import metrics 
 import numpy as np
 import random
 import pandas as pd
 import scipy
+import sys
 
 def min_clusters(points):
 	k_list = all_methods(points)
@@ -26,20 +29,25 @@ def median_clusters(points):
 	k_list = all_methods(points)
 	return int(np.median(np.array(k_list)))
 
+def majority_clusters(points):
+    k_list = all_methods(points)
+    return max(set(k_list), key = k_list.count) 
+
 def all_methods(points):
-	k_list = [0] * 4
-	k_list[0] = ELBOW(points)
-	k_list[1] = GAP_STATISTICS(points)
-	k_list[2] = SC(points)		
-	k_list[3] = CH(points)
-	return k_list
+    k_list = [0] * 6
+    k_list[0] = ELBOW(points)
+    k_list[1] = GAP_STATISTICS(points)
+    k_list[2] = SC(points)
+    k_list[3] = CH(points)
+    k_list[4] = DB(points)
+    k_list[5] = BIC(points)
+    return k_list
 
 
 ### Calinski-Harabasz Index
 def CH(data):
 	ch_max = 0
 	ch_max_clusters = 2
-	ch_score_max = -1 #this is the minimum possible score
 	for n_clusters in range(2,10):
 		model = KMeans(n_clusters = n_clusters)
 		labels = model.fit_predict(data)
@@ -47,9 +55,6 @@ def CH(data):
 		if ch_score > ch_max:
 			ch_max = ch_score
 			ch_max_clusters = n_clusters
-		if ch_score > ch_score_max:
-			ch_score_max = ch_score
-			best_n_clusters = n_clusters
 	return ch_max_clusters
 ### END Calinski-Harabasz Index
 
@@ -58,7 +63,6 @@ def CH(data):
 def SC(data):
 	sil_max = 0
 	sil_max_clusters = 2
-	sil_score_max = -1 #this is the minimum possible score
 	for n_clusters in range(2,10):
 		model = KMeans(n_clusters = n_clusters)
 		labels = model.fit_predict(data)
@@ -66,12 +70,35 @@ def SC(data):
 		if sil_score > sil_max:
 			sil_max = sil_score
 			sil_max_clusters = n_clusters
-		if sil_score > sil_score_max:
-			sil_score_max = sil_score
-			best_n_clusters = n_clusters
 	return sil_max_clusters
 ### END silhouette score 
 
+### DB score 
+def DB(data):
+    db_min = sys.float_info.max
+    db_min_clusters = 2
+    for n_clusters in range(2,10):
+        model = KMeans(n_clusters = n_clusters)
+        labels = model.fit_predict(data)
+        db_score = metrics.davies_bouldin_score(data, labels)
+        if db_score < db_min:
+            db_min = db_score
+            db_min_clusters = n_clusters
+    return db_min_clusters
+### END DB score 
+
+### Bayesian Information Criterion
+def BIC(data):
+    bic_max = 0
+    bic_max_clusters = 2
+    for n_clusters in range(2,10):
+        gm = GaussianMixture(n_components=n_clusters,n_init=10,tol=1e-3,max_iter=1000).fit(data)
+        bic_score = -gm.bic(data)
+        if bic_score > bic_max:
+            bic_max = bic_score
+            bic_max_clusters = n_clusters
+    return bic_max_clusters
+### END Bayesian Information Criterion
 
 
 ### ELBOW

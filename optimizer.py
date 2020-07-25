@@ -70,7 +70,9 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
 		- elbow: The number of clusters is automatically detected by elbow method
 		- gap: The number of clusters is automatically detected by gap analysis methos
 		- silhouette: The number of clusters is automatically detected by silhouette coefficient method
-		- CH: The number of clusters is automatically detected by CH index
+		- CH: The number of clusters is automatically detected by Calinski-Harabasz index
+		- DB: The number of clusters is automatically detected by Davies Bouldin index
+		- BIC: The number of clusters is automatically detected by Bayesian Information Criterion score
 		- min: The number of clusters is automatically detected by the minimum value of the number of clusters detected by the elbow, gap analysis, silhouette coefficient, DB, and CH methods
 		- max: The number of clusters is automatically detected by the maximum value of the number of clusters detected by the elbow, gap analysis, silhouette coefficient, DB, and CH methods
 		- median: The number of clusters is automatically detected by the median value of the number of clusters detected by the elbow, gap analysis, silhouette coefficient, DB, and CH methods		 
@@ -129,9 +131,12 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
 
 	# CSV Header for for the cinvergence 
 	CnvgHeader=[]
-
-
-	datasets_directory = "datasets/" # the directory where the dataset is stored
+	
+	if labels_exist:
+		datasets_directory = "datasets/" # the directory where the dataset is stored
+	else:
+		datasets_directory = "datasets/unsupervised/" # the directory where the dataset is stored
+		
 	results_directory = time.strftime("%Y-%m-%d-%H-%M-%S") + '/'
 	Path(results_directory).mkdir(parents=True, exist_ok=True)
 
@@ -180,12 +185,18 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
 			k[h] = clus_det.DB(points[h])#k: Number of clusters		
 		elif n_clusters == 'CH':
 			k[h] = clus_det.CH(points[h])#k: Number of clusters		
+		elif n_clusters == 'DB':
+			k[h] = clus_det.DB(points[h])#k: Number of clusters		
+		elif n_clusters == 'BIC':
+			k[h] = clus_det.BIC(points[h])#k: Number of clusters	
 		elif n_clusters == 'min':
-			k[h] = clus_det.min_clusters(points[h])#k: Number of clusters		
+			k[h] = clus_det.min_clusters(points[h])#k: Number of clusters
 		elif n_clusters == 'max':
 			k[h] = clus_det.max_clusters(points[h])#k: Number of clusters		
 		elif n_clusters == 'median':
-			k[h] = clus_det.median_clusters(points[h])#k: Number of clusters		
+			k[h] = clus_det.median_clusters(points[h])#k: Number of clusters
+		elif n_clusters == 'majority':
+			k[h] = clus_det.majority_clusters(points[h])#k: Number of clusters			
 		else:
 			k[h] = n_clusters[h]#k: Number of clusters	
 
@@ -214,6 +225,7 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
                 
                 for z in range (0,NumOfRuns):
                     print("Dataset: " + dataset_List[h])
+                    print("k: " + str(k[h])) 
                     print("Run no.: " + str(z)) 
                     print("Population Size: " + str(PopulationSize)) 
                     print("Iterations: " + str(Iterations)) 
