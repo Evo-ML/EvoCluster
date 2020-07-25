@@ -73,9 +73,10 @@ def run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags,
 		- CH: The number of clusters is automatically detected by Calinski-Harabasz index
 		- DB: The number of clusters is automatically detected by Davies Bouldin index
 		- BIC: The number of clusters is automatically detected by Bayesian Information Criterion score
-		- min: The number of clusters is automatically detected by the minimum value of the number of clusters detected by the elbow, gap analysis, silhouette coefficient, DB, and CH methods
-		- max: The number of clusters is automatically detected by the maximum value of the number of clusters detected by the elbow, gap analysis, silhouette coefficient, DB, and CH methods
-		- median: The number of clusters is automatically detected by the median value of the number of clusters detected by the elbow, gap analysis, silhouette coefficient, DB, and CH methods		 
+		- min: The number of clusters is automatically detected by the minimum value of the number of clusters detected by all detection techniques
+		- max: The number of clusters is automatically detected by the maximum value of the number of clusters detected by all detection techniques
+		- median: The number of clusters is automatically detected by the median value of the number of clusters detected by all detection techniques
+		- majority: The number of clusters is automatically detected by the majority vote of the number of clusters detected by all detection techniques
 	labels_exist : boolean, default = True
 		Specify if labels exist as the last column of the csv file of the datasets in dataset_List
 		if the value is False, the following hold:
