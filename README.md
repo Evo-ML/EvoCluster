@@ -2,13 +2,15 @@
 
 ### Beta Version ###
 
-EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation  of  the  framework  includes  ten  metaheristic  optimizers,  thirtydatasets,  five  objective  functions,  and  twelve  evaluation  measures.  The  source code of EvoCluster is publicly available at (http://evo-ml.com/2019/10/25/evocluster/).
+EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation of the framework includes ten metaheuristic optimizers, thirty datasets, five objective functions, twelve evaluation measures, more than twenty distance measures, and ten different ways for detecting the k value. The  source code of EvoCluster is publicly available at (http://evo-ml.com/evocluster/).
 
 ## Features
 - Ten nature-inspired metaheuristic optimizers are implemented (SSA, PSO, GA, BAT, FFA, GWO, WOA, MVO, MFO, and CS).
 - Five objective functions (SSE, TWCV, SC, DB, and DI).
 - Thirty datasets obtained from Scikit learn, UCI, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris Blog
 - Twelve evaluation measures (SSE, Purity,	Entropy,	HS,	CS,	VM,	AMI,	ARI,	Fmeasure,	TWCV,	SC,	Accuracy,	DI,	DB,	and Standard Diviation)
+- More than twenty distance measures
+- Ten different ways for detecting the k value
 )
 - The implimentation uses the fast array manipulation using [`NumPy`] (http://www.numpy.org/).
 - Matrix support using [`SciPy`'s] (https://www.scipy.org/) package.
@@ -46,6 +48,10 @@ Clone the Git repository from GitHub
 EvoCluster Framework contains more than thirty datasets (Obtainied from UCI repository, scikit learn, School of Computing at University of Eastern Finland, ELKI, KEEL, and Naftali Harris). 
 The main file is the main.py, which considered the interface of the framewok. In the optimizer.py you 
 can setup your experiment by selecting the optmizers, the datasets, objective functions, number of runs, number of iterations, and the population size. The following is a sample example to use the EvoCluster framework.
+
+Guding videos:
+- Introduction video: https://www.youtube.com/watch?v=3DYIdxILZaw
+- Demo video: https://www.youtube.com/watch?v=TOIo9WMBWUc
 
 ## Select framework parameters
 
@@ -141,6 +147,8 @@ Use the [issue tracker](https://github.com/RaneemQaddoura/EvoCluster/issues).
 
 Please include these citations if you plan to use this Framework:
 
+- Qaddoura, Raneem, Hossam Faris, Ibrahim Aljarah, and Pedro A. Castillo. "EvoCluster: An Open-Source Nature-Inspired Optimization Clustering Framework." SN Computer Science, 2(3), 1-12, 2021.
+
 - Qaddoura, Raneem, Hossam Faris, Ibrahim Aljarah, and Pedro A. Castillo. "EvoCluster: An Open-Source Nature-Inspired Optimization Clustering Framework in Python." In International Conference on the Applications of Evolutionary Computation (Part of EvoStar), pp. 20-36. Springer, Cham, 2020.
 
 - Ruba Abu Khurma, Ibrahim Aljarah, Ahmad Sharieh, and Seyedali Mirjalili. Evolopy-fs: An
@@ -148,14 +156,6 @@ open-source nature-inspired optimization framework in python for feature selecti
 Machine Learning Techniques, pages 131–173. Springer, 2020
 
 - Hossam Faris, Ibrahim Aljarah, Sayedali Mirjalili, Pedro Castillo, and J.J Merelo. "EvoloPy: An Open-source Nature-inspired Optimization Framework in Python". In Proceedings of the 8th International Joint Conference on Computational Intelligence - Volume 3: ECTA,ISBN 978-989-758-201-1, pages 171-177.
-
-- Raneem Qaddoura, Hossam Faris, and Ibrahim Aljarah*. An efficient clustering algorithm based
-on the k-nearest neighbors with an indexing ratio. International Journal of Machine Learning and Cybernetics, pages 1–40, 2019.
-
-- Ibrahim Aljarah, Majdi Mafarja, Ali Asghar Heidari, Hossam Faris, and Seyedali Mirjalili.
-Clustering analysis using a novel locality-informed grey wolf-inspired clustering approach. Knowledge and Information Systems, pages 1–33, 2019.
-
-- Sarah Shukri, Hossam Faris, Ibrahim Aljarah*, Seyedali Mirjalili, and Ajith Abraham. Evolutionary static and dynamic clustering algorithms based on multi-verse optimizer. Engineering Applications of Artificial Intelligence, 72:54–66, 2018. 
 
 - Ibrahim Aljarah, Majdi Mafarja, Ali Asghar Heidari, Hossam Faris, and Seyedali Mirjalili. Multiverse optimizer: Theory, literature review, and application in a data clustering. In Nature-Inspired Optimizers: Theories, Literature Reviews and Applications, pages 123–141. Springer International Publishing, Cham, 2020
 
