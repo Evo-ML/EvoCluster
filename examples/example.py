@@ -4,7 +4,7 @@ Created on Sat Mar  9 18:50:48 2019
 
 @author: Raneem
 """
-from evocluster.optimizer import run
+from EvoCluster.evocluster import EvoCluster
 
 # Select optimizers
 # "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS"
@@ -29,4 +29,5 @@ params = {'PopulationSize' : 30, 'Iterations' : 50}
 export_flags = {'Export_avg':True, 'Export_details':True, 'Export_details_labels':True, 
 'Export_convergence':True, 'Export_boxplot':True}
 
-run(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
+evo = EvoCluster(optimizer, objectivefunc, dataset_List, NumOfRuns, params, export_flags)
+evo.run()

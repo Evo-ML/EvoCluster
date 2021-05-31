@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="evocluster",
+    name="EvoCluster",
     version="1.0.0",
     author="Raneem Qaddoura, Hossam Faris, and Ibrahim Aljarah",
     author_email="raneem.qaddoura@gmail.com",
