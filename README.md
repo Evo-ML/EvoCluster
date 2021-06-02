@@ -7,7 +7,7 @@
 EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic  optimizers  that  are  customized  to  perform  partitional  clustering tasks.  The  goal  of  this  framework  is  to  provide  a  user-friendly  and  customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation of the framework includes ten metaheuristic optimizers, thirty datasets, five objective functions, twelve evaluation measures, more than twenty distance measures, and ten different ways for detecting the k value. The  source code of EvoCluster is publicly available at (http://evo-ml.com/evocluster/).
 
 ## Versions ##
-- **1.0**
+- <a href='https://pypi.org/project/EvoCluster/'>1.0.3</a>
 
 ## Supporting links
 - **Web Page**: http://evo-ml.com/evocluster/
