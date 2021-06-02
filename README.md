@@ -85,7 +85,7 @@ ec.run() #run the framework
 ```
 Now your experiment is ready to go. Enjoy!  
 
-The results will be automaticly generated ina folder which is concatnated with the date and time of the experiment. this folder consists of three csv files and two types of plots:
+The results will be automaticly generated in a folder which is concatnated with the date and time of the experiment. this folder consists of three csv files and two types of plots:
 - experiment.csv
 - experiment_details.csv
 - experiment_details_Labels.csv
