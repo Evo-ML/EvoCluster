@@ -1,4 +1,6 @@
-<img alt="EvoCluster-logo" src="http://evo-ml.com/wp-content/uploads/2021/06/EvoCluster-logo.png" width=200>
+<div align="center">
+<img alt="EvoCluster-logo" src="http://evo-ml.com/wp-content/uploads/2021/06/EvoCluster-logo.png" width=40%>
+</div>
 
 # An Open-Source Nature-Inspired Optimization Clustering Framework in Python
 ## Description ##
