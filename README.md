@@ -12,6 +12,7 @@ EvoCluster is an open source and cross-platform framework implemented in Python 
 ## Supporting links
 - **Web Page**: http://evo-ml.com/evocluster/
 - **Paper**: https://link.springer.com/chapter/10.1007/978-3-030-43722-0_2
+- **Extended Paper**: https://link.springer.com/article/10.1007/s42979-021-00511-0
 - **Introduction video**: https://www.youtube.com/watch?v=3DYIdxILZaw
 - **Demo video**: https://www.youtube.com/watch?v=TOIo9WMBWUc
 - **Source code**: https://github.com/RaneemQaddoura/EvoCluster/
