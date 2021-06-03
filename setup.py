@@ -33,6 +33,7 @@ setup(
         author_email="dangtrunganh@gmail.com, raneem.qaddoura@gmail.com",
         description=DESCRIPTION,
         long_description=long_description,
+        long_description_content_type='text/markdown',
         # package_dir={"": "EvoCluster"},
         packages=find_packages(),
         # add any additional packages that 
