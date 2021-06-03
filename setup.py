@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 
 VERSION = '1.0.4' 
 DESCRIPTION = 'An Open-Source Nature-Inspired Optimization Clustering Framework in Python'
-LONGDESCRIPTION = 'EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic optimizers that are customized to perform partitional clustering tasks. The goal of this framework is to provide a user-friendly and customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation of the framework includes ten metaheuristic optimizers, thirty datasets, five objective functions, twelve evaluation measures, more than twenty distance measures, and ten different ways for detecting the k value.'
+# LONGDESCRIPTION = 'EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic optimizers that are customized to perform partitional clustering tasks. The goal of this framework is to provide a user-friendly and customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation of the framework includes ten metaheuristic optimizers, thirty datasets, five objective functions, twelve evaluation measures, more than twenty distance measures, and ten different ways for detecting the k value.'
 
 from pip._internal.req import parse_requirements
 
@@ -21,7 +21,7 @@ reqs = [str(ir.requirement) for ir in install_reqs]
 # read the contents of your README file
 from os import path
 this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+with open(path.join(this_directory, 'long_description.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 
@@ -32,7 +32,7 @@ setup(
         author="Raneem Qaddoura, Hossam Faris, Ibrahim Aljarah, and Pedro A. Castillo",
         author_email="dangtrunganh@gmail.com, raneem.qaddoura@gmail.com",
         description=DESCRIPTION,
-        long_description=LONGDESCRIPTION,
+        long_description=long_description,
         # package_dir={"": "EvoCluster"},
         packages=find_packages(),
         # add any additional packages that 
