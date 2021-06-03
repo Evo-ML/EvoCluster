@@ -28,10 +28,10 @@ setup(
        # the name must match the folder name 'EvoCC'
         name="EvoCluster", 
         version=VERSION,
-        author="Raneem Qaddoura, Hossam Faris, and Ibrahim Aljarah",
+        author="Raneem Qaddoura, Hossam Faris, Ibrahim Aljarah, and Pedro A. Castillo",
         author_email="dangtrunganh@gmail.com, raneem.qaddoura@gmail.com",
         description=DESCRIPTION,
-        long_description=long_description,
+        long_description="EvoCluster is an open source and cross-platform framework implemented in Python which includes the most well-known and recent nature-inspired meta heuristic optimizers that are customized to perform partitional clustering tasks. The goal of this framework is to provide a user-friendly and customizable implementation of the metaheuristic based clustering algorithms which canbe utilized by experienced and non-experienced users for different applications.The framework can also be used by researchers who can benefit from the implementation of the metaheuristic optimizers for their research studies. EvoClustercan be extended by designing other optimizers, including more objective func-tions, adding other evaluation measures, and using more data sets. The current implementation of the framework includes ten metaheuristic optimizers, thirty datasets, five objective functions, twelve evaluation measures, more than twenty distance measures, and ten different ways for detecting the k value.",
         # package_dir={"": "EvoCluster"},
         packages=find_packages(),
         # add any additional packages that 
