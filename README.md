@@ -33,7 +33,7 @@ EvoCluster is an open source and cross-platform framework implemented in Python 
 - More optimizers, objective functions, adatasets, and evaluation measures are comming soon.
  
 ## Installation
-Python 3.xx is required.
+EvoCluster supports Python 3.xx.
  
 ### With pip
 EvoCluster can be installed using pip as follows:
@@ -46,6 +46,10 @@ EvoCluster can be installed using conda as follows:
 
 ```shell script
 conda install EvoCluster
+```
+### To install from master
+```
+pip install git+https://github.com/RaneemQaddoura/EvoCluster.git#egg=EvoCluster
 ```
 ### Get the source
 
