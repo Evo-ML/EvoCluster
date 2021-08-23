@@ -79,11 +79,11 @@ class EvoCluster:
             sys.exit()
 
         if isinstance(self.n_clusters, list):
-            if len(self.n_clusters) != len(self.dataset_List):
+            if len(self.n_clusters) != len(self.dataset_list):
                 print(
                     'Length of n_clusters list should equal the length of dataset_List list')
                 sys.exit()
-            if min(self._clusters) < 2:
+            if min(self.n_clusters) < 2:
                 print('n_clusters value should be larger than 2')
                 sys.exit()
             if self.auto_cluster == True:
@@ -140,6 +140,7 @@ class EvoCluster:
             rawData = open(os.path.join(os.path.abspath(os.path.dirname(
                 __file__)), datasets_directory + dataset_filename), 'rt')
             data = numpy.loadtxt(rawData, delimiter=",")
+            print(data)
 
             nPoints, nValues = data.shape  # Number of points and Number of values for each point
 
