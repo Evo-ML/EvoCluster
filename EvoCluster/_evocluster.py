@@ -72,7 +72,7 @@ class EvoCluster:
         #         'Supervised value for n_clusters is not allowed when labels_exist value is false')
         #     sys.exit()
 
-    def run(self):
+    def run(self, home_data=None, output_folder=None):
         if not self.labels_exist and self.n_clusters == 'supervised':
             print(
                 'Syupervised value for n_clusters is not allowed when labels_exist value is false')
@@ -113,13 +113,22 @@ class EvoCluster:
         # CSV Header for for the cinvergence
         CnvgHeader = []
 
+        # default_datasets_folder = "datasets/"
+
         if self.labels_exist:
             datasets_directory = "datasets/"  # the directory where the dataset is stored
         else:
             # the directory where the dataset is stored
             datasets_directory = "datasets/unsupervised/"
+        if home_data is not None:
+            datasets_directory = home_data +"/"
 
-        results_directory = time.strftime("%Y-%m-%d-%H-%M-%S") + '/'
+        if output_folder is None:
+            output_folder = time.strftime("%Y-%m-%d-%H-%M-%S") + '/'
+            
+        results_directory = output_folder + '/'
+
+        
         Path(results_directory).mkdir(parents=True, exist_ok=True)
 
         dataset_len = len(self.dataset_list)

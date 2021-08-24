@@ -5,6 +5,7 @@ Created on Thu May 20 17:06:19 2021
 @author: Dang Trung Anh
 """
 
+from math import fabs
 from EvoCluster import EvoCluster
 
 optimizer = ["SSA", "PSO", "GA", "GWO"] #Select optimizers from the list of available ones: "SSA","PSO","GA","BAT","FFA","GWO","WOA","MVO","MFO","CS".
@@ -24,7 +25,7 @@ ec = EvoCluster(
     export_flags,
     auto_cluster=True,
     n_clusters='supervised',
-    labels_exist=True,
+    labels_exist=False,
     metric='euclidean'
 )
 
