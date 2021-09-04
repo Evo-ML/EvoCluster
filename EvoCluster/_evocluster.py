@@ -149,7 +149,6 @@ class EvoCluster:
             rawData = open(os.path.join(os.path.abspath(os.path.dirname(
                 __file__)), datasets_directory + dataset_filename), 'rt')
             data = numpy.loadtxt(rawData, delimiter=",")
-            print(data)
 
             nPoints, nValues = data.shape  # Number of points and Number of values for each point
 
