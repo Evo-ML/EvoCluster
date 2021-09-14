@@ -25,7 +25,7 @@ ec = EvoCluster(
     export_flags,
     auto_cluster=True,
     n_clusters='supervised',
-    labels_exist=False,
+    labels_exist=True,
     metric='euclidean'
 )
 
